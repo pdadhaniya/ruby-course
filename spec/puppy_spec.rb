@@ -9,10 +9,4 @@ describe PuppyBreeder::Puppy do
 		end
 	end
 
-	describe "#sold" do
-		it "should sell a puppy" do
-			expect(puppy.sold).to eq("sold")
-		end
-	end
-
 end
