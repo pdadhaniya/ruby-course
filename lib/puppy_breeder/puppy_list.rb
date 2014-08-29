@@ -17,6 +17,7 @@ module PuppyBreeder
   	def puppy_sold(puppy)
   		@sold_puppies << puppy
   		@list.delete(puppy)
+  		puppy.status = "sold"
   		puppy
 	end
   end
