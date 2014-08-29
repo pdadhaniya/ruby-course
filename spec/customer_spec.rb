@@ -1,11 +1,12 @@
 require_relative 'spec_helper.rb'
 
 describe PuppyBreeder::Customer do
-
+	let(:buyer) { PuppyBreeder::Customer.new("David") }
 
 	describe "#initialize" do
-		xit "should add a name and puppy purchased array for reach customer" do
-
+		it "should add a name and puppy purchased array for reach customer" do
+			expect(buyer.name).to eq("David")
+			expect(buyer.puppy_purchased).to eq([])
 		end
 	end
 
