@@ -67,7 +67,7 @@ describe PuppyBreeder::Customer do
 				expect(buyer.puppy_purchased).to eq([puppy])
 			end
 
-			xit "should run the puppy sold method from the puppy list class" do
+			it "should run the puppy sold method from the puppy list class" do
 				new_list.add(puppy)
 				buyer.purchase_request(puppy, new_list)
 				buyer.complete_purchase(puppy, new_list)
