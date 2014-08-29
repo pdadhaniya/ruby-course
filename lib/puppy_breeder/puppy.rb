@@ -5,7 +5,6 @@ module PuppyBreeder
 
   	def initialize(name)
   		@name = name
-  		@@all_puppies << self
   	end
 
   end
