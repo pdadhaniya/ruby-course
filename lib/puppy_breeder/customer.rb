@@ -15,8 +15,11 @@ module PuppyBreeder
   	def purchase_request(puppy, a_list)
   		if (a_list.list).include?(puppy)
   			@pending_request = "yes"
-  			# puppy.status = "pending"
+  			puppy.status = "pending"
+  		else
+  			false
   		end
   	end
+
   end
 end
