@@ -3,14 +3,9 @@ module PuppyBreeder
   class Puppy
 	attr_reader :name  	
 
-	@@all_puppies = []
-
   	def initialize(name)
   		@name = name
-  	end
-
-  	def self.list
-  		@@all_puppies
+  		@@all_puppies << self
   	end
 
   end
