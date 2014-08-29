@@ -49,7 +49,7 @@ describe PuppyBreeder::Customer do
 		
 		context "there is a pending request" do
 
-			xit "should check if pending request is yes and close the request to purchase a puppy" do
+			it "should check if pending request is yes and close the request to purchase a puppy" do
 				new_list.add(puppy)
 				buyer.purchase_request(puppy, new_list)
 				buyer.complete_purchase(puppy, new_list)
