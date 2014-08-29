@@ -23,7 +23,7 @@ describe PuppyBreeder::PuppyList do
 	describe "#puppy_sold" do
 
 		context "valid; puppy in the list" do
-			xit 'returns a puppy object' do
+			it "returns a puppy object" do
 				result = new_list.puppy_sold(puppy)
 				expect(result.name).to eq("Fred")
 			end
