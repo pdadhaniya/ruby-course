@@ -6,13 +6,7 @@ describe PuppyBreeder::Puppy do
 			result = PuppyBreeder::Puppy.new("Fred")
 			expect(result.name).to eq("Fred")
 		end
-	end
 
-	describe ".list" do
-		it "should return no puppies if there are no puppies" do
-			result = PuppyBreeder::Puppy.list
-			expect(result).to eq([])
-		end
 	end
 
 end
