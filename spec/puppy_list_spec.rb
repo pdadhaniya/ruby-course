@@ -9,7 +9,7 @@ describe PuppyBreeder::PuppyList do
 			expect(new_list.list).to eq([])
 		end
 
-		xit "should make a new sold puppies list" do
+		it "should make a new sold puppies list" do
 			expect(new_list.sold_puppies).to eq([])
 		end
 	end
