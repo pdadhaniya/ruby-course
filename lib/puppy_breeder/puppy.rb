@@ -2,18 +2,12 @@
 module PuppyBreeder
   class Puppy
 	attr_reader :name
-	attr_reader :status  	
+	attr_accessor :status
 
   	def initialize(name)
   		@name = name
   		@status = "available"
   	end
-
-  	def sold
-  		@status = "sold"
-  	end
-
-
 
   end
 end
