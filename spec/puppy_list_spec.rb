@@ -35,6 +35,11 @@ describe PuppyBreeder::PuppyList do
 				expect(new_list.sold_puppies).to eq([puppy])
 				expect(new_list.list).to eq([])
 			end
+
+			it "should change the status of a sold puppy to sold" do
+				result = new_list.puppy_sold(puppy)
+				expect(result.status).to eq("sold")
+			end
 		end
 
 		context "invalid; puppy not in list" do
