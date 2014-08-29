@@ -46,22 +46,44 @@ describe PuppyBreeder::Customer do
 	end
 
 	describe "complete_purchase" do
-		xit "should close the request to purchase a puppy" do
+		
+		context "there is a pending request" do
+
+			xit "should check if pending request is yes and close the request to purchase a puppy" do
+				new_list.add(puppy)
+				buyer.purchase_request(puppy, new_list)
+				buyer.complete_purchase(puppy, new_list)
+				expect(buyer.pending_request).to eq("no")
+			end
+
+			xit "should remove request from breeder's queue" do
+
+			end
+
+			xit "should add puppy to puppy_purchased array" do
+				new_list.add(puppy)
+				buyer.purchase_request(puppy, new_list)
+				buyer.complete_purchase(puppy, new_list)
+				expect(buyer.puppy_purchased).to eq([puppy])
+			end
+
+			xit "should run the puppy sold method from the puppy list class" do
+				new_list.add(puppy)
+				buyer.purchase_request(puppy, new_list)
+				buyer.complete_purchase(puppy, new_list)
+				expect(puppy.status).to eq("sold")
+			end
 
 		end
 
-		xit "should change the puppy's status to sold" do
+		context "there is no pending request" do
 
+			it "should return false if there is not pending request" do
+				new_list.add(puppy)
+				result = buyer.complete_purchase(puppy, new_list)
+				expect(result).to eq(false)
+			end
 		end
-
-		xit "should remove request from breeder's queue" do
-
-		end
-
-		xit "should add puppy to puppy_purchased array" do
-
-		end
-
 	end
 
 end
