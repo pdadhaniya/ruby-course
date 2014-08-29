@@ -21,5 +21,16 @@ module PuppyBreeder
   		end
   	end
 
+  	def complete_purchase(puppy, a_list)
+  		if @pending_request == "yes"
+  			@pending_request = "no"
+  			@puppy_purchased << puppy
+  			a_list.puppy_sold(puppy)
+  		else
+  			false
+  		end
+  	end
+
+
   end
 end
