@@ -22,8 +22,17 @@ describe PuppyBreeder::PuppyList do
 
 	describe "#puppy_sold" do
 
+		context "invalid; puppy not in list" do
+			it "returns false if the puppy is not in the list" do
+				carl = PuppyBreeder::Puppy.new("Carl")
+				result = new_list.puppy_sold(carl)
+				expect(result).to eq(false)
+			end
+		end
+
 		context "valid; puppy in the list" do
 			it "returns a puppy object" do
+				new_list.add(puppy)
 				result = new_list.puppy_sold(puppy)
 				expect(result.name).to eq("Fred")
 			end
@@ -37,14 +46,12 @@ describe PuppyBreeder::PuppyList do
 			end
 
 			it "should change the status of a sold puppy to sold" do
+				new_list.add(puppy)
 				result = new_list.puppy_sold(puppy)
 				expect(result.status).to eq("sold")
 			end
 		end
 
-		context "invalid; puppy not in list" do
-
-		end
 
 	end
 
