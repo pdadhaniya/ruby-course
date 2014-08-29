@@ -60,7 +60,7 @@ describe PuppyBreeder::Customer do
 
 			end
 
-			xit "should add puppy to puppy_purchased array" do
+			it "should add puppy to puppy_purchased array" do
 				new_list.add(puppy)
 				buyer.purchase_request(puppy, new_list)
 				buyer.complete_purchase(puppy, new_list)
