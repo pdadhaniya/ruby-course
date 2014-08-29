@@ -15,10 +15,14 @@ module PuppyBreeder
   	end
 
   	def puppy_sold(puppy)
-  		@sold_puppies << puppy
-  		@list.delete(puppy)
-  		puppy.status = "sold"
-  		puppy
+  		unless @list.include?(puppy)	
+  			false
+  		else
+  			puppy.status = "sold"
+  			@sold_puppies << puppy
+  			@list.delete(puppy)
+  			puppy
+  		end
 	end
   end
 end
