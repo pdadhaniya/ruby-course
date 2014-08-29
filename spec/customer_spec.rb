@@ -22,8 +22,10 @@ describe PuppyBreeder::Customer do
 				expect(buyer.pending_request).to eq("yes")
 			end
 
-			xit "should change the puppy's status to pending" do
-
+			it "should change the puppy's status to pending" do
+				new_list.add(puppy)
+				buyer.purchase_request(puppy, new_list)
+				expect(puppy.status).to eq("pending")
 			end
 
 			xit "should add request to breeder's pending queue" do
@@ -31,6 +33,16 @@ describe PuppyBreeder::Customer do
 			end
 
 		end
+
+		context "list doesn't include a puppy" do
+		
+			it "should return false if list doesn't include a puppy" do		
+				result = buyer.purchase_request(puppy, new_list)
+				expect(result).to eq(false)
+			end
+
+		end
+
 	end
 
 	describe "complete_purchase" do
