@@ -22,11 +22,16 @@ describe PuppyBreeder::Breeder do
 			expect(maker.completed_purchase).to eq({})
 		end
 
+		it "should make a new instance of the customer list class" do
+			expect(maker.breeders_customers.customer_list).to eq({})
+		end
+
 	end
 
 	describe "#add" do
-		xit "should add puppy to the list" do
-			expect((new_list.add(puppy)).length).to eq(1)
+		it "should add puppy to the puppy list" do
+			maker.add_puppy(puppy)
+			expect(maker.puppy_list.list).to eq([puppy])
 		end
 	end
 
