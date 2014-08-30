@@ -6,7 +6,7 @@ describe PuppyBreeder::Customer do
 	let(:buyer) { PuppyBreeder::Customer.new("David") }
 
 	describe "#initialize" do
-		it "should add a name and puppy purchased array for reach customer" do
+		xit "should add a name and puppy purchased array for reach customer" do
 			expect(buyer.name).to eq("David")
 			expect(buyer.puppy_purchased).to eq([])
 		end
@@ -16,13 +16,13 @@ describe PuppyBreeder::Customer do
 
 		context "list includes a puppy" do
 		
-			it "should make a request to purchase a puppy" do
+			xit "should make a request to purchase a puppy" do
 				new_list.add(puppy)
 				buyer.purchase_request(puppy, new_list)
 				expect(buyer.pending_request).to eq("yes")
 			end
 
-			it "should change the puppy's status to pending" do
+			xit "should change the puppy's status to pending" do
 				new_list.add(puppy)
 				buyer.purchase_request(puppy, new_list)
 				expect(puppy.status).to eq("pending")
@@ -36,7 +36,7 @@ describe PuppyBreeder::Customer do
 
 		context "list doesn't include a puppy" do
 		
-			it "should return false if list doesn't include a puppy" do		
+			xit "should return false if list doesn't include a puppy" do		
 				result = buyer.purchase_request(puppy, new_list)
 				expect(result).to eq(false)
 			end
@@ -49,7 +49,7 @@ describe PuppyBreeder::Customer do
 		
 		context "there is a pending request" do
 
-			it "should check if pending request is yes and close the request to purchase a puppy" do
+			xit "should check if pending request is yes and close the request to purchase a puppy" do
 				new_list.add(puppy)
 				buyer.purchase_request(puppy, new_list)
 				buyer.complete_purchase(puppy, new_list)
@@ -60,14 +60,14 @@ describe PuppyBreeder::Customer do
 
 			end
 
-			it "should add puppy to puppy_purchased array" do
+			xit "should add puppy to puppy_purchased array" do
 				new_list.add(puppy)
 				buyer.purchase_request(puppy, new_list)
 				buyer.complete_purchase(puppy, new_list)
 				expect(buyer.puppy_purchased).to eq([puppy])
 			end
 
-			it "should run the puppy sold method from the puppy list class" do
+			xit "should run the puppy sold method from the puppy list class" do
 				new_list.add(puppy)
 				buyer.purchase_request(puppy, new_list)
 				buyer.complete_purchase(puppy, new_list)
@@ -78,7 +78,7 @@ describe PuppyBreeder::Customer do
 
 		context "there is no pending request" do
 
-			it "should return false if there is not pending request" do
+			xit "should return false if there is not pending request" do
 				new_list.add(puppy)
 				result = buyer.complete_purchase(puppy, new_list)
 				expect(result).to eq(false)
