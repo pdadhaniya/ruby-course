@@ -18,6 +18,10 @@ describe PuppyBreeder::Breeder do
 			expect(maker.breeder_request_list.purchase_request_list).to eq([])
 		end
 
+		it "should make an empty hash for completed purchases" do
+			expect(maker.completed_purchase).to eq({})
+		end
+
 	end
 
 	describe "#add" do
