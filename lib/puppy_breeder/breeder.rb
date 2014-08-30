@@ -2,9 +2,11 @@
 module PuppyBreeder
   class Breeder
 
+    attr_reader :breeder_name
+    attr_reader :puppy_list
   	attr_accessor :breeder_request_list
   	attr_reader :completed_purchase
-  	attr_reader :breeder_request_list
+  	attr_reader :breeders_customers
 
   	#initialize breeder
   	def initialize(breeder_name)
@@ -16,7 +18,7 @@ module PuppyBreeder
   	end
 
   	def add_puppy(puppy)
-  		@puppy_list << puppy
+  		@puppy_list.list << puppy
   	end
   		#take from puppy list
 
