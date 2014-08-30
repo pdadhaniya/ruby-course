@@ -5,7 +5,7 @@ module PuppyBreeder
   	attr_accessor :purchase_request
 
   	def initialize(puppy, customer)
-      @purchase_request = {}
+      @purchase_request = { puppy => customer }
   	end
 
     #get from customer
