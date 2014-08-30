@@ -3,6 +3,7 @@ require_relative 'spec_helper.rb'
 describe PuppyBreeder::Breeder do
 	let(:maker) { PuppyBreeder::Breeder.new("Jim") }
 	let(:puppy) { PuppyBreeder::Puppy.new("Fred") }
+	let(:buyer) { PuppyBreeder::Customer.new("David") }
 
 	describe "#initialize" do
 		it "should make a new breeder" do
@@ -11,6 +12,10 @@ describe PuppyBreeder::Breeder do
 
 		it "should make a new instance of the puppy list class" do
 			expect(maker.puppy_list.list).to eq([])
+		end
+
+		it "should make a new instance of the purchase request list class" do
+			expect(maker.breeder_request_list.purchase_request_list).to eq([])
 		end
 
 	end
