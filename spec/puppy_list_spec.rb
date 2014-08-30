@@ -2,16 +2,15 @@ require_relative 'spec_helper.rb'
 
 describe PuppyBreeder::PuppyList do
 	let(:new_list) { PuppyBreeder::PuppyList.new}
-	let(:puppy) { PuppyBreeder::Puppy.new("Fred")}
+	# let(:puppy) { PuppyBreeder::Puppy.new("Fred")}
 
 	describe "#initialize" do
-		xit "should make a new puppy list" do
+		it "should make a new puppy list" do
 			expect(new_list.list).to eq([])
+			new_list.list << "a"
+			expect(new_list.list).to eq(["a"])
 		end
 
-		xit "should make a new sold puppies list" do
-			expect(new_list.sold_puppies).to eq([])
-		end
 	end
 
 	describe "#add" do
