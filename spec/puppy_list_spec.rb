@@ -5,17 +5,17 @@ describe PuppyBreeder::PuppyList do
 	let(:puppy) { PuppyBreeder::Puppy.new("Fred")}
 
 	describe "#initialize" do
-		it "should make a new puppy list" do
+		xit "should make a new puppy list" do
 			expect(new_list.list).to eq([])
 		end
 
-		it "should make a new sold puppies list" do
+		xit "should make a new sold puppies list" do
 			expect(new_list.sold_puppies).to eq([])
 		end
 	end
 
 	describe "#add" do
-		it "should add puppy to the list" do
+		xit "should add puppy to the list" do
 			expect((new_list.add(puppy)).length).to eq(1)
 		end
 	end
@@ -23,7 +23,7 @@ describe PuppyBreeder::PuppyList do
 	describe "#puppy_sold" do
 
 		context "invalid; puppy not in list" do
-			it "returns false if the puppy is not in the list" do
+			xit "returns false if the puppy is not in the list" do
 				carl = PuppyBreeder::Puppy.new("Carl")
 				result = new_list.puppy_sold(carl)
 				expect(result).to eq(false)
@@ -31,13 +31,13 @@ describe PuppyBreeder::PuppyList do
 		end
 
 		context "valid; puppy in the list" do
-			it "returns a puppy object" do
+			xit "returns a puppy object" do
 				new_list.add(puppy)
 				result = new_list.puppy_sold(puppy)
 				expect(result.name).to eq("Fred")
 			end
 			
-			it "should add the sold puppy to the sold puppy list and remove it from the other list" do
+			xit "should add the sold puppy to the sold puppy list and remove it from the other list" do
 				new_list.add(puppy)
 				expect(new_list.list).to eq([puppy])
 				new_list.puppy_sold(puppy)
@@ -45,7 +45,7 @@ describe PuppyBreeder::PuppyList do
 				expect(new_list.list).to eq([])
 			end
 
-			it "should change the status of a sold puppy to sold" do
+			xit "should change the status of a sold puppy to sold" do
 				new_list.add(puppy)
 				result = new_list.puppy_sold(puppy)
 				expect(result.status).to eq("sold")
