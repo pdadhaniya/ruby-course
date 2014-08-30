@@ -4,11 +4,12 @@ describe PuppyBreeder::Customer do
 	let(:puppy) { PuppyBreeder::Puppy.new("Fred")}
 	let(:new_list) { PuppyBreeder::PuppyList.new}
 	let(:buyer) { PuppyBreeder::Customer.new("David") }
+	let(:buyer2) { PuppyBreeder::Customer.new("Paul")}
 
 	describe "#initialize" do
-		xit "should add a name and puppy purchased array for reach customer" do
+		it "should add a name for each customer" do
 			expect(buyer.name).to eq("David")
-			expect(buyer.puppy_purchased).to eq([])
+			expect(buyer2.name).to eq("Paul")
 		end
 	end
 
