@@ -65,6 +65,20 @@ describe PuppyBreeder::Breeder do
 			maker.complete_purchase(puppy, buyer)
 			expect(maker.breeder_request_list.purchase_request_list).to eq([])
 		end
+
+		it "should add a customer key and puppy value to the customer list" do
+			maker.add_puppy(puppy)
+			maker.add_purchase_request(puppy, buyer)
+			maker.complete_purchase(puppy, buyer)
+			expect(maker.breeders_customers.customer_list).to eq({ buyer => puppy })
+		end
+
+		xit "should remove the puppy from the puppy list" do
+			maker.add_puppy(puppy)
+			maker.add_purchase_request(puppy, buyer)
+			maker.complete_purchase(puppy, buyer)
+			expect(maker.puppy_list.list).to eq([])
+		end
 		
 		xit "should check if pending request is yes and close the request to purchase a puppy" do
 			new_list.add(puppy)
