@@ -43,8 +43,8 @@ describe PuppyBreeder::Breeder do
 			expect(maker.breeder_request_list.purchase_request_list).to eq([{puppy => buyer}])
 		end
 		
-		xit "should return false if list doesn't include a puppy" do		
-			result = buyer.purchase_request(puppy, new_list)
+		it "should return false if puppy list doesn't include a puppy" do		
+			result = maker.add_purchase_request(puppy, buyer)
 			expect(result).to eq(false)
 		end
 
@@ -52,46 +52,46 @@ describe PuppyBreeder::Breeder do
 
 	describe "complete_purchase" do
 
-		it "should add puppy key and custoemr value to completed purchase hash" do
-			maker.add_puppy(puppy)
-			maker.add_purchase_request(puppy, buyer)
-			maker.complete_purchase(puppy, buyer)
-			expect(maker.completed_purchase).to eq({ puppy => buyer })
+		context "the puppy and customer are in the purchase request list" do
+
+			it "should add puppy key and custoemr value to completed purchase hash" do
+				maker.add_puppy(puppy)
+				maker.add_purchase_request(puppy, buyer)
+				maker.complete_purchase(puppy, buyer)
+				expect(maker.completed_purchase).to eq({ puppy => buyer })
+			end
+
+			it "should remove the puppy and customer from the purchase request list" do
+				maker.add_puppy(puppy)
+				maker.add_purchase_request(puppy, buyer)
+				maker.complete_purchase(puppy, buyer)
+				expect(maker.breeder_request_list.purchase_request_list).to eq([])
+			end
+
+			it "should add a customer key and puppy value to the customer list" do
+				maker.add_puppy(puppy)
+				maker.add_purchase_request(puppy, buyer)
+				maker.complete_purchase(puppy, buyer)
+				expect(maker.breeders_customers.customer_list).to eq({ buyer => puppy })
+			end
+
+			it "should remove the puppy from the puppy list" do
+				maker.add_puppy(puppy)
+				maker.add_purchase_request(puppy, buyer)
+				maker.complete_purchase(puppy, buyer)
+				expect(maker.puppy_list.list).to eq([])
+			end
 		end
 
-		it "should remove the puppy and customer from the purchase request list" do
-			maker.add_puppy(puppy)
-			maker.add_purchase_request(puppy, buyer)
-			maker.complete_purchase(puppy, buyer)
-			expect(maker.breeder_request_list.purchase_request_list).to eq([])
-		end
-
-		it "should add a customer key and puppy value to the customer list" do
-			maker.add_puppy(puppy)
-			maker.add_purchase_request(puppy, buyer)
-			maker.complete_purchase(puppy, buyer)
-			expect(maker.breeders_customers.customer_list).to eq({ buyer => puppy })
-		end
-
-		it "should remove the puppy from the puppy list" do
-			maker.add_puppy(puppy)
-			maker.add_purchase_request(puppy, buyer)
-			maker.complete_purchase(puppy, buyer)
-			expect(maker.puppy_list.list).to eq([])
-		end
+		context "the puppy and customer are not in the purchase request list" do
 		
-		xit "should check if pending request is yes and close the request to purchase a puppy" do
-			new_list.add(puppy)
-			buyer.purchase_request(puppy, new_list)
-			buyer.complete_purchase(puppy, new_list)
-			expect(buyer.pending_request).to eq("no")
+			it "should return false if there is not a purchase request" do
+				maker.add_puppy(puppy)
+				result = maker.complete_purchase(puppy, buyer)
+				expect(result).to eq(false)
+			end
 		end
-
-		it "should return false if there is not a purchase request" do
-			maker.add_puppy(puppy)
-			result = maker.complete_purchase(puppy, buyer)
-			expect(result).to eq(false)
-		end
+	
 	end
 
 end
