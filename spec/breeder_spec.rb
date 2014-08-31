@@ -73,7 +73,7 @@ describe PuppyBreeder::Breeder do
 			expect(maker.breeders_customers.customer_list).to eq({ buyer => puppy })
 		end
 
-		xit "should remove the puppy from the puppy list" do
+		it "should remove the puppy from the puppy list" do
 			maker.add_puppy(puppy)
 			maker.add_purchase_request(puppy, buyer)
 			maker.complete_purchase(puppy, buyer)
