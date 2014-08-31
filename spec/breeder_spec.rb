@@ -87,67 +87,11 @@ describe PuppyBreeder::Breeder do
 			expect(buyer.pending_request).to eq("no")
 		end
 
-		xit "should add puppy to puppy_purchased array" do
-			new_list.add(puppy)
-			buyer.purchase_request(puppy, new_list)
-			buyer.complete_purchase(puppy, new_list)
-			expect(buyer.puppy_purchased).to eq([puppy])
-		end
-
-		xit "should run the puppy sold method from the puppy list class" do
-			new_list.add(puppy)
-			buyer.purchase_request(puppy, new_list)
-			buyer.complete_purchase(puppy, new_list)
-			expect(puppy.status).to eq("sold")
-		end
-
-		xit "should return false if there is not pending request" do
-			new_list.add(puppy)
-			result = buyer.complete_purchase(puppy, new_list)
+		it "should return false if there is not a purchase request" do
+			maker.add_puppy(puppy)
+			result = maker.complete_purchase(puppy, buyer)
 			expect(result).to eq(false)
 		end
 	end
-
-	describe "#puppy_sold" do
-
-		context "invalid; puppy not in list" do
-			xit "returns false if the puppy is not in the list" do
-				carl = PuppyBreeder::Puppy.new("Carl")
-				result = new_list.puppy_sold(carl)
-				expect(result).to eq(false)
-			end
-		end
-
-		context "valid; puppy in the list" do
-			xit "returns a puppy object" do
-				new_list.add(puppy)
-				result = new_list.puppy_sold(puppy)
-				expect(result.name).to eq("Fred")
-			end
-			
-			xit "should add the sold puppy to the sold puppy list and remove it from the other list" do
-				new_list.add(puppy)
-				expect(new_list.list).to eq([puppy])
-				new_list.puppy_sold(puppy)
-				expect(new_list.sold_puppies).to eq([puppy])
-				expect(new_list.list).to eq([])
-			end
-
-		end
-
-
-	end
-
-
-
-
-
-
-
-
-
-
-
-
 
 end
