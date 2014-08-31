@@ -8,7 +8,6 @@ module PuppyBreeder
   	attr_reader :completed_purchase
   	attr_reader :breeders_customers
 
-  	#initialize breeder
   	def initialize(breeder_name)
   		@breeder_name = breeder_name
   		@puppy_list = PuppyBreeder::PuppyList.new
@@ -20,9 +19,7 @@ module PuppyBreeder
   	def add_puppy(puppy)
   		@puppy_list.list << puppy
   	end
-  		#take from puppy list
 
-  	#input purchase request
     def add_purchase_request(puppy, customer)
   		if @puppy_list.list.include?(puppy)
       @breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request
@@ -35,7 +32,6 @@ module PuppyBreeder
       @breeder_request_list.purchase_request_list.delete({puppy => customer})
     end
 
-  	#accept purchase request
   	def complete_purchase(puppy, customer)
       if @breeder_request_list.purchase_request_list.include?({puppy => customer})
   		  @completed_purchase[puppy] = customer
@@ -45,16 +41,8 @@ module PuppyBreeder
       else
         false
       end
-      end
-  		#and add to customer list
-  		#take from customer
-
-  	#view completed purchases
-  	# def view_purchases
-  	# 	@completed_purchase
-  	# end
-
-  	#
+    end
+  	
   end
 
 end
