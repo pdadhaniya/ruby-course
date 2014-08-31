@@ -23,7 +23,7 @@ module PuppyBreeder
   		#take from puppy list
 
   	#input purchase request
-  	def add_purchase_request(puppy, customer)
+    def add_purchase_request(puppy, customer)
   		@breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request
     end
 
