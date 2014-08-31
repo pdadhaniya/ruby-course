@@ -9,10 +9,6 @@ module PuppyBreeder
 			@customer_list = {}
 		end
 
-		# def add(customer)
-		# 	@customer_list << customer
-		# end
-
 	end
 
 end
