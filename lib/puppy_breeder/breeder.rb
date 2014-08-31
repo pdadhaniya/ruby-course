@@ -31,6 +31,10 @@ module PuppyBreeder
       end
     end
 
+    def deny_request(puppy, customer)
+      @breeder_request_list.purchase_request_list.delete({puppy => customer})
+    end
+
   	#accept purchase request
   	def complete_purchase(puppy, customer)
       if @breeder_request_list.purchase_request_list.include?({puppy => customer})
