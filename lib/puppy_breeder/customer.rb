@@ -10,7 +10,7 @@ module PuppyBreeder
   	end
 
   	def purchase_request(breeder, puppy)
-        breeder.breeder_request_list.purchase_request_list << PuppyBreeder::PurchaseRequest.new(puppy, self)
+        breeder.breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, self)).purchase_request
   	end
 
   end
