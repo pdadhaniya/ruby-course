@@ -30,10 +30,25 @@ describe PuppyBreeder::Breeder do
 
 	describe "#add" do
 		it "should add puppy to the puppy list" do
-			maker.add_puppy(puppy)
+			maker.add_puppy(puppy) 
 			expect(maker.puppy_list.list).to eq([puppy])
 		end
 	end
+
+	describe "#add_purchase_request" do 
+		
+		it "should add an instance of purchase request class to purchase request list" do
+			maker.add_puppy(puppy)
+			maker.add_purchase_request(puppy, buyer)
+			expect(maker.breeder_request_list.purchase_request_list).to eq([{puppy => buyer}])
+		end
+		
+		xit "should return false if list doesn't include a puppy" do		
+			result = buyer.purchase_request(puppy, new_list)
+			expect(result).to eq(false)
+		end
+
+	end	
 
 	describe "#puppy_sold" do
 
@@ -67,39 +82,6 @@ describe PuppyBreeder::Breeder do
 			end
 		end
 
-
-	end
-
-	describe "#purchase_request" do 
-
-		context "list includes a puppy" do
-		
-			xit "should make a request to purchase a puppy" do
-				new_list.add(puppy)
-				buyer.purchase_request(puppy, new_list)
-				expect(buyer.pending_request).to eq("yes")
-			end
-
-			xit "should change the puppy's status to pending" do
-				new_list.add(puppy)
-				buyer.purchase_request(puppy, new_list)
-				expect(puppy.status).to eq("pending")
-			end
-
-			xit "should add request to breeder's pending queue" do
-
-			end
-
-		end
-
-		context "list doesn't include a puppy" do
-		
-			xit "should return false if list doesn't include a puppy" do		
-				result = buyer.purchase_request(puppy, new_list)
-				expect(result).to eq(false)
-			end
-
-		end
 
 	end
 
