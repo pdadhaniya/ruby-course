@@ -29,11 +29,15 @@ module PuppyBreeder
 
   	#accept purchase request
   	def complete_purchase(puppy, customer)
-  		@completed_purchase[puppy] = customer
-  		@breeder_request_list.purchase_request_list.delete({puppy => customer})
-  		@breeders_customers.customer_list[customer] = puppy
-  		@puppy_list.list.delete(puppy)
-  	end
+      if @breeder_request_list.purchase_request_list.include?({puppy => customer})
+  		  @completed_purchase[puppy] = customer
+  		  @breeder_request_list.purchase_request_list.delete({puppy => customer})
+  		  @breeders_customers.customer_list[customer] = puppy
+  		  @puppy_list.list.delete(puppy)
+      else
+        false
+      end
+      end
   		#and add to customer list
   		#take from customer
 
