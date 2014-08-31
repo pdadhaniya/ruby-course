@@ -19,6 +19,12 @@ describe PuppyBreeder::Customer do
 			buyer.purchase_request(maker, puppy)
 			expect(maker.breeder_request_list.purchase_request_list).to eq([{puppy => buyer}])
 		end
+
+		it "should return false if puppy list doesn't include a puppy" do
+			result = buyer.purchase_request(maker, puppy)
+			expect(result).to eq(false)
+		end
+
 	end
 
 end
