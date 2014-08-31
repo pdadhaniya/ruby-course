@@ -8,16 +8,5 @@ module PuppyBreeder
       @purchase_request = { puppy => customer }
   	end
 
-    #get from customer
-  	# def pending(puppy)
-  	# 	@pending_puppies << puppy
-  	# end
-
-    #get from breeder
-  	# def complete_request(puppy)
-  	# 	@completed_puppies << puppy
-  	# 	@pending_puppies.delete(puppy)
-  	# end
-
   end
 end
