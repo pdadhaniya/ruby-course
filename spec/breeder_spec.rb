@@ -48,7 +48,17 @@ describe PuppyBreeder::Breeder do
 			expect(result).to eq(false)
 		end
 
-	end	
+	end
+
+	describe "#deny_request" do
+		it "should deny a purchase request and remove it from the purchase request list" do
+			maker.add_puppy(puppy)
+			maker.add_purchase_request(puppy, buyer)
+			maker.deny_request(puppy, buyer)
+			expect(maker.breeder_request_list.purchase_request_list).to eq([])
+		end
+
+	end
 
 	describe "complete_purchase" do
 
