@@ -24,7 +24,11 @@ module PuppyBreeder
 
   	#input purchase request
     def add_purchase_request(puppy, customer)
-  		@breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request
+  		if @puppy_list.list.include?(puppy)
+      @breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request
+      else
+        false
+      end
     end
 
   	#accept purchase request
