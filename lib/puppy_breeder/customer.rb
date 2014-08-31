@@ -10,8 +10,12 @@ module PuppyBreeder
   	end
 
   	def purchase_request(breeder, puppy)
+        if breeder.puppy_list.list.include?(puppy)
         breeder.breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, self)).purchase_request
-  	end
+        else
+          false
+        end
+    end
 
   end
 end
