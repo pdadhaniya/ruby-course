@@ -35,17 +35,17 @@ describe PuppyBreeder::Breeder do
 		end
 	end
 
-	describe "#add_purchase_request" do 
-		
+	describe "#add_purchase_request" do
 		it "should add an instance of purchase request class to purchase request list" do
 			maker.add_puppy(puppy)
 			maker.add_purchase_request(puppy, buyer)
 			expect(maker.breeder_request_list.purchase_request_list).to eq([{puppy => buyer}])
 		end
 		
-		it "should return false if puppy list doesn't include a puppy" do		
-			result = maker.add_purchase_request(puppy, buyer)
-			expect(result).to eq(false)
+
+		it "should add an instance of purchase request class & order in a hash to on hold list if puppy is not in list" do
+			maker.add_purchase_request(puppy, buyer)
+			expect(maker.pending_list.on_hold_list).to eq([{:dog => {puppy => buyer}, :rank => 1}])
 		end
 
 	end
