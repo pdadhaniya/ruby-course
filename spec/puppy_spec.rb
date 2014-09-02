@@ -8,7 +8,6 @@ describe PuppyBreeder::Puppy do
 			expect(puppy.name).to eq("Fred")
 			expect(puppy.breed).to eq("husky")
 		end
-
 	end
 
 end
