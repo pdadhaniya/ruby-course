@@ -7,24 +7,33 @@ module PuppyBreeder
   	attr_accessor :breeder_request_list
   	attr_reader :completed_purchase
   	attr_reader :breeders_customers
+    attr_reader :pending_list
+    attr_accessor :order
 
   	def initialize(breeder_name)
   		@breeder_name = breeder_name
   		@puppy_list = PuppyBreeder::PuppyList.new
   		@breeder_request_list = PuppyBreeder::PurchaseRequestList.new
   		@completed_purchase = {}
-  		@breeders_customers = PuppyBreeder::CustomerList.new 
+  		@breeders_customers = PuppyBreeder::CustomerList.new
+      @pending_list = PuppyBreeder::OnHold.new
+      @order = 0
   	end
 
   	def add_puppy(puppy)
   		@puppy_list.list << puppy
   	end
 
+    # def complete_pending
+    #   @pending_list.each do |x|
+    # end
+
     def add_purchase_request(puppy, customer)
   		if @puppy_list.list.include?(puppy)
-      @breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request
+        @breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request
       else
-        false
+        @order += 1
+        @pending_list.on_hold_list << { :dog => ((PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request), :rank => @order }
       end
     end
 
@@ -42,6 +51,8 @@ module PuppyBreeder
         false
       end
     end
+
+
   	
   end
 
