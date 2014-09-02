@@ -1,7 +1,7 @@
 require_relative 'spec_helper.rb'
 
 describe PuppyBreeder::Customer do
-	let(:puppy) { PuppyBreeder::Puppy.new("Fred")}
+	let(:puppy) { PuppyBreeder::Puppy.new("Fred", "husky")}
 	let(:maker) { PuppyBreeder::Breeder.new("Jim") }
 	let(:buyer) { PuppyBreeder::Customer.new("David") }
 	let(:buyer2) { PuppyBreeder::Customer.new("Paul")}
