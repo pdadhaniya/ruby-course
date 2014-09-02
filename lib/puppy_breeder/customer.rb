@@ -13,7 +13,8 @@ module PuppyBreeder
         if breeder.puppy_list.list.include?(puppy)
         breeder.breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, self)).purchase_request
         else
-          false
+          breeder.order += 1
+          breeder.pending_list.on_hold_list << { :dog => ((PuppyBreeder::PurchaseRequest.new(puppy, self)).purchase_request), :rank => breeder.order }
         end
     end
 
