@@ -8,7 +8,6 @@ module PuppyBreeder
   	attr_reader :completed_purchase
   	attr_reader :breeders_customers
     attr_reader :pending_list
-    attr_accessor :order
 
   	def initialize(breeder_name)
   		@breeder_name = breeder_name
@@ -17,23 +16,39 @@ module PuppyBreeder
   		@completed_purchase = {}
   		@breeders_customers = PuppyBreeder::CustomerList.new
       @pending_list = PuppyBreeder::OnHold.new
-      @order = 0
   	end
 
   	def add_puppy(puppy)
-  		@puppy_list.list << puppy
-  	end
+      @puppy_list.list << puppy
+      check_puppy_in_pending(puppy)
+    end
 
-    # def complete_pending
-    #   @pending_list.each do |x|
-    # end
+    def check_puppy_in_pending(puppy)
+      if @pending_list.on_hold_list.each do |x|
+          x.each do |k, v|
+           remove_from_pending(k, v) if k == puppy
+          end
+        end
+      end
+    end
+
+    def remove_from_pending(puppy, customer)
+        @pending_list.on_hold_list.delete({puppy => customer})
+        @breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request
+    end
 
     def add_purchase_request(puppy, customer)
   		if @puppy_list.list.include?(puppy)
+        @breeder_request_list.purchase_request_list.each do |x|
+          x.each do |k, v|
+            if k == puppy
+              return false
+            end
+          end
+        end
         @breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request
       else
-        @order += 1
-        @pending_list.on_hold_list << { :dog => ((PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request), :rank => @order }
+        @pending_list.on_hold_list << (PuppyBreeder::PurchaseRequest.new(puppy, customer)).purchase_request
       end
     end
 
