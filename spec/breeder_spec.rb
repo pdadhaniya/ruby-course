@@ -4,6 +4,7 @@ describe PuppyBreeder::Breeder do
 	let(:maker) { PuppyBreeder::Breeder.new("Jim") }
 	let(:puppy) { PuppyBreeder::Puppy.new("Fred", "husky") }
 	let(:buyer) { PuppyBreeder::Customer.new("David") }
+	let(:buyer2) { PuppyBreeder::Customer.new("Phil") }
 
 	describe "#initialize" do
 		it "should make a new breeder" do
@@ -28,10 +29,22 @@ describe PuppyBreeder::Breeder do
 
 	end
 
-	describe "#add" do
+	describe "#add_puppy" do
 		it "should add puppy to the puppy list" do
 			maker.add_puppy(puppy) 
 			expect(maker.puppy_list.list).to eq([puppy])
+		end
+
+		it "should remove from pending list if desired puppy is added" do
+			maker.add_purchase_request(puppy, buyer)
+			maker.add_puppy(puppy)
+			expect(maker.pending_list.on_hold_list).to eq([])
+		end
+
+		it "should move a puppy from pending list to purchase request list if a puppy from pending was added" do
+			maker.add_purchase_request(puppy, buyer)
+			maker.add_puppy(puppy)
+			expect(maker.breeder_request_list.purchase_request_list).to eq([{puppy => buyer}])
 		end
 	end
 
@@ -41,11 +54,17 @@ describe PuppyBreeder::Breeder do
 			maker.add_purchase_request(puppy, buyer)
 			expect(maker.breeder_request_list.purchase_request_list).to eq([{puppy => buyer}])
 		end
+
+		it "should return false if a purchase request is made for a puppy already in the purchase request list" do
+			maker.add_puppy(puppy)
+			maker.add_purchase_request(puppy, buyer)
+			expect(maker.add_purchase_request(puppy, buyer2)).to eq(false)
+		end
 		
 
 		it "should add an instance of purchase request class & order in a hash to on hold list if puppy is not in list" do
 			maker.add_purchase_request(puppy, buyer)
-			expect(maker.pending_list.on_hold_list).to eq([{:dog => {puppy => buyer}, :rank => 1}])
+			expect(maker.pending_list.on_hold_list).to eq([{puppy => buyer}])
 		end
 
 	end
