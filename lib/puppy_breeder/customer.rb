@@ -21,7 +21,7 @@ module PuppyBreeder
           end
         breeder.breeder_request_list.purchase_request_list << (PuppyBreeder::PurchaseRequest.new(puppy, self)).purchase_request
         else
-          breeder.pending_list.on_hold_list << (PuppyBreeder::PurchaseRequest.new(puppy, self)).purchase_request
+          # breeder.pending_list.on_hold_list << (PuppyBreeder::PurchaseRequest.new(puppy, self)).purchase_request
         end
     end
 
