@@ -5,7 +5,7 @@ module PuppyBreeder
 
 		attr_accessor :customer_list
 
-		def initialize
+		def initialize #this is customer table
 			@customer_list = {}
 		end
 
