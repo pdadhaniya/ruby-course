@@ -6,12 +6,12 @@ describe PuppyBreeder::Repositories::PuppyRepo do
 
 	before(:each) do
     PuppyBreeder.purchase_repo.drop_tables
-    PuppyBreeder.breeder_repo.drop_tables_customer
-    PuppyBreeder.breeder_repo.drop_tables_breeder
+    PuppyBreeder.customer_repo.drop_tables
+    PuppyBreeder.breeder_repo.drop_tables
 		PuppyBreeder.puppy_repo.drop_tables
 		PuppyBreeder.puppy_repo.create_tables
-    PuppyBreeder.breeder_repo.create_tables_breeder
-    PuppyBreeder.breeder_repo.create_tables_customer
+    PuppyBreeder.breeder_repo.create_tables
+    PuppyBreeder.customer_repo.create_tables
     PuppyBreeder.purchase_repo.create_tables
 	end
 
