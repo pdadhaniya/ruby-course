@@ -4,7 +4,7 @@ module PuppyBreeder
 
 		attr_accessor :on_hold_list
 
-		def initialize
+		def initialize #this is status attribute in purchase request table
 			@on_hold_list = []
 		end
 
