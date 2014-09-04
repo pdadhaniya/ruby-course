@@ -2,11 +2,12 @@
 module PuppyBreeder
   class Customer
 
-  	attr_reader :name
-  	attr_reader :purchase_request
+  	attr_reader :name, :purchase_request
+    attr_accessor :id
 
   	def initialize(name)
   		@name = name
+      @id = nil
   	end
 
   	def purchase_request(breeder, puppy)
