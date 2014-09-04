@@ -27,10 +27,10 @@ describe PuppyBreeder::Customer do
 		end
 
 
-		it "should add an instance of purchase request class & order in a hash to on hold list if puppy is not in list" do
-			buyer.purchase_request(maker, puppy)
-			expect(maker.pending_list.on_hold_list).to eq([{puppy => buyer}])
-		end
+		# it "should add an instance of purchase request class & order in a hash to on hold list if puppy is not in list" do
+		# 	buyer.purchase_request(maker, puppy)
+		# 	expect(maker.pending_list.on_hold_list).to eq([{puppy => buyer}])
+		# end
 
 	end
 
