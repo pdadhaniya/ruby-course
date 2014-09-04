@@ -4,7 +4,7 @@ module PuppyBreeder
 
   	attr_accessor :list
 
-  	def initialize
+  	def initialize #this is puppy table
   		@list = []
   	end
 
