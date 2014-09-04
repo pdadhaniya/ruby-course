@@ -25,7 +25,7 @@ module PuppyBreeder
 		@purchase_repo
 	end
 
-	def self.customer_repo(w)
+	def self.customer_repo=(w)
 		@customer_repo = w
 	end
 
@@ -48,11 +48,13 @@ require_relative 'puppy_breeder/on_hold.rb'
 require_relative 'puppy_breeder/repos/breeder_repo.rb'
 require_relative 'puppy_breeder/repos/puppy_repo.rb'
 require_relative 'puppy_breeder/repos/purchase_request_repo.rb'
+require_relative 'puppy_breeder/repos/customer_repo.rb'
 
 
 PuppyBreeder.puppy_repo = PuppyBreeder::Repositories::PuppyRepo.new
 PuppyBreeder.breeder_repo = PuppyBreeder::Repositories::BreederRepo.new
 PuppyBreeder.purchase_repo = PuppyBreeder::Repositories::PurchaseRequestRepo.new
+PuppyBreeder.customer_repo = PuppyBreeder::Repositories::CustomerRepo.new
 
 
 
