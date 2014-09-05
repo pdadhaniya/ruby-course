@@ -33,28 +33,33 @@ module PuppyBreeder
 		@customer_repo
 	end
 
+	def self.breeds_repo=(v)
+		@breeds_repo = v
+	end
+
+	def self.breeds_repo
+		@breeds_repo
+	end
+
 end
 
 
 
 require_relative 'puppy_breeder/puppy.rb'
-require_relative 'puppy_breeder/purchase_request.rb'
-require_relative 'puppy_breeder/puppy_list.rb'
 require_relative 'puppy_breeder/breeder.rb'
-require_relative 'puppy_breeder/customer_list.rb'
 require_relative 'puppy_breeder/customer.rb'
-require_relative 'puppy_breeder/purchase_request_list.rb'
-require_relative 'puppy_breeder/on_hold.rb'
 require_relative 'puppy_breeder/repos/breeder_repo.rb'
 require_relative 'puppy_breeder/repos/puppy_repo.rb'
 require_relative 'puppy_breeder/repos/purchase_request_repo.rb'
 require_relative 'puppy_breeder/repos/customer_repo.rb'
+require_relative 'puppy_breeder/repos/breeds_repo.rb'
 
 
 PuppyBreeder.puppy_repo = PuppyBreeder::Repositories::PuppyRepo.new
 PuppyBreeder.breeder_repo = PuppyBreeder::Repositories::BreederRepo.new
 PuppyBreeder.purchase_repo = PuppyBreeder::Repositories::PurchaseRequestRepo.new
 PuppyBreeder.customer_repo = PuppyBreeder::Repositories::CustomerRepo.new
+PuppyBreeder.breeds_repo = PuppyBreeder::Repositories::BreedsRepo.new
 
 
 

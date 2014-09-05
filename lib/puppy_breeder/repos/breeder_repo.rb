@@ -17,6 +17,11 @@ module PuppyBreeder
         end
       end
 
+      def view_completed
+        sql = "SELECT * FROM purchase_request WHERE status='completed'"
+        result = @db.exec(sql)
+      end
+
       def drop_tables
         sql = "DROP TABLE breeder"
         result = @db.exec(sql)

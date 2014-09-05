@@ -8,12 +8,14 @@ describe PuppyBreeder::Repositories::CustomerRepo do
 
   before(:each) do
     PuppyBreeder.purchase_repo.drop_tables
-    PuppyBreeder.customer_repo.drop_tables
-    PuppyBreeder.breeder_repo.drop_tables
     PuppyBreeder.puppy_repo.drop_tables
-    PuppyBreeder.puppy_repo.create_tables
-    PuppyBreeder.breeder_repo.create_tables
+    PuppyBreeder.breeds_repo.drop_tables
+    PuppyBreeder.breeder_repo.drop_tables
+    PuppyBreeder.customer_repo.drop_tables
     PuppyBreeder.customer_repo.create_tables
+    PuppyBreeder.breeder_repo.create_tables
+    PuppyBreeder.breeds_repo.create_tables
+    PuppyBreeder.puppy_repo.create_tables
     PuppyBreeder.purchase_repo.create_tables
   end
 
@@ -22,7 +24,7 @@ describe PuppyBreeder::Repositories::CustomerRepo do
       result = PuppyBreeder.customer_repo.add_customer(customer)
       expect(result["id"]).to eq("1")
       expect(result["name"]).to eq("Robert")
-    end
+    end #done
   end
 
 

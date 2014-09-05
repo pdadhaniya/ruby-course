@@ -8,26 +8,28 @@ module PuppyBreeder
         @db = PG.connect(host: 'localhost', dbname: 'puppy-breeder-db')
       end
 
-      def add_purchase_request(puppy, customer)
-        if puppy.id.nil? #change status to unavailable
-          false
-        else 
-          sql = "INSERT INTO purchase_request( puppy, customer, status )
-            VALUES ( '#{puppy.id}', '#{customer.id}', 'pending' ) RETURNING *"
-          result = @db.exec(sql)
-        end
+      def add_purchase_request(breed, customer)
+        breed_id = PuppyBreeder.breeds_repo.get_breed_id(breed) 
+        sql = "INSERT INTO purchase_request( breed_id, customer_id, status )
+          VALUES ( '#{breed_id}', '#{customer.id}', 'pending' ) RETURNING *"
+        result = @db.exec(sql)
       end
 
       #def unavailable
       #if puppies table is updated with a puppy with status unavailable, change to pending
 
-      def deny_request(puppy, customer)
-        sql = "UPDATE purchase_request SET ( status ) = ( 'denied' ) WHERE puppy='#{puppy.id}' AND customer='#{customer.id}' RETURNING *"
+
+
+
+      def deny_request(breed, customer)
+        breed_id = PuppyBreeder.breeds_repo.get_breed_id(breed)
+        sql = "UPDATE purchase_request SET ( status ) = ( 'denied' ) WHERE breed_id='#{breed_id}' AND customer_id='#{customer.id}' RETURNING *"
         result = @db.exec(sql)
       end
 
-      def complete_request(puppy, customer)
-        sql = "UPDATE purchase_request SET ( status ) = ( 'completed' ) WHERE puppy='#{puppy.id}' AND customer='#{customer.id}' RETURNING *"
+      def complete_request(breed, customer)
+        breed_id = PuppyBreeder.breeds_repo.get_breed_id(breed)
+        sql = "UPDATE purchase_request SET ( status ) = ( 'completed' ) WHERE breed_id='#{breed_id}' AND customer_id='#{customer.id}' RETURNING *"
         result = @db.exec(sql)
       end
 
@@ -43,7 +45,7 @@ module PuppyBreeder
       end
 
       def create_tables
-        sql = "CREATE TABLE purchase_request( id SERIAL, puppy INTEGER REFERENCES puppies ( id ), customer INTEGER REFERENCES customer ( id ), status TEXT, PRIMARY KEY( id ) )"
+        sql = "CREATE TABLE purchase_request( id SERIAL, breed_id INTEGER REFERENCES breeds ( id ), customer_id INTEGER REFERENCES customer ( id ), status TEXT, PRIMARY KEY( id ) )"
         result = @db.exec(sql)
       end
 
