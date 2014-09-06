@@ -41,6 +41,14 @@ module PuppyBreeder
 		@breeds_repo
 	end
 
+	def self.breeds_request_repo=(u)
+		@breeds_request_repo = u
+	end
+
+	def self.breeds_request_repo
+		@breeds_request_repo
+	end
+
 end
 
 
@@ -53,13 +61,14 @@ require_relative 'puppy_breeder/repos/puppy_repo.rb'
 require_relative 'puppy_breeder/repos/purchase_request_repo.rb'
 require_relative 'puppy_breeder/repos/customer_repo.rb'
 require_relative 'puppy_breeder/repos/breeds_repo.rb'
-
+require_relative 'puppy_breeder/repos/breeds_request_repo.rb'
 
 PuppyBreeder.puppy_repo = PuppyBreeder::Repositories::PuppyRepo.new
 PuppyBreeder.breeder_repo = PuppyBreeder::Repositories::BreederRepo.new
 PuppyBreeder.purchase_repo = PuppyBreeder::Repositories::PurchaseRequestRepo.new
 PuppyBreeder.customer_repo = PuppyBreeder::Repositories::CustomerRepo.new
 PuppyBreeder.breeds_repo = PuppyBreeder::Repositories::BreedsRepo.new
+PuppyBreeder.breeds_request_repo = PuppyBreeder::Repositories::BreedsRequestRepo.new
 
 
 

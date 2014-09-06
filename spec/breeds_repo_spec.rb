@@ -4,6 +4,7 @@ describe PuppyBreeder::Repositories::BreedsRepo do
   let(:breed1) { PuppyBreeder.breeds_repo.add_breed("collie", 7) }
 
   before(:each) do
+    PuppyBreeder.breeds_request_repo.drop_tables
     PuppyBreeder.purchase_repo.drop_tables
     PuppyBreeder.puppy_repo.drop_tables
     PuppyBreeder.breeds_repo.drop_tables
@@ -14,6 +15,7 @@ describe PuppyBreeder::Repositories::BreedsRepo do
     PuppyBreeder.breeds_repo.create_tables
     PuppyBreeder.puppy_repo.create_tables
     PuppyBreeder.purchase_repo.create_tables
+    PuppyBreeder.breeds_request_repo.create_tables
   end
 
   describe "#add_breed" do

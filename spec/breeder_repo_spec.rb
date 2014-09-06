@@ -8,6 +8,7 @@ describe PuppyBreeder::Repositories::BreederRepo do
   let(:breed1) { PuppyBreeder.breeds_repo.add_breed("collie", 7) }
 
   before(:each) do
+    PuppyBreeder.breeds_request_repo.drop_tables
     PuppyBreeder.purchase_repo.drop_tables
     PuppyBreeder.puppy_repo.drop_tables
     PuppyBreeder.breeds_repo.drop_tables
@@ -18,6 +19,7 @@ describe PuppyBreeder::Repositories::BreederRepo do
     PuppyBreeder.breeds_repo.create_tables
     PuppyBreeder.puppy_repo.create_tables
     PuppyBreeder.purchase_repo.create_tables
+    PuppyBreeder.breeds_request_repo.create_tables
   end
 
   describe "#add_breeder" do
@@ -34,11 +36,11 @@ describe PuppyBreeder::Repositories::BreederRepo do
       PuppyBreeder.breeder_repo.add_breeder(breeder)
       breed1
       PuppyBreeder.puppy_repo.add_puppy(fred, breeder)
-      PuppyBreeder.purchase_repo.add_purchase_request('collie', customer)
-      PuppyBreeder.purchase_repo.complete_request('collie', customer)
+      PuppyBreeder.purchase_repo.add_purchase_request(['collie'], customer)
+      PuppyBreeder.purchase_repo.complete_request(['collie'], customer)
       result = PuppyBreeder.breeder_repo.view_completed
       expect(result.entries[0]["id"]).to eq('1')
-      expect(result.entries[0]["breed_id"]).to eq('1')
+      # expect(result.entries[0]["breed_id"]).to eq('1')
       expect(result.entries[0]["customer_id"]).to eq('1')
       expect(result.entries[0]["status"]).to eq('completed')
     end #done
@@ -48,8 +50,8 @@ describe PuppyBreeder::Repositories::BreederRepo do
       PuppyBreeder.breeder_repo.add_breeder(breeder)
       breed1
       PuppyBreeder.puppy_repo.add_puppy(fred, breeder)
-      PuppyBreeder.purchase_repo.add_purchase_request('collie', customer)
-      PuppyBreeder.purchase_repo.deny_request('collie', customer)
+      PuppyBreeder.purchase_repo.add_purchase_request(['collie'], customer)
+      PuppyBreeder.purchase_repo.deny_request(['collie'], customer)
       result = PuppyBreeder.breeder_repo.view_completed
       expect(result.entries).to eq([])
     end #done

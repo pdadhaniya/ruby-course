@@ -8,6 +8,7 @@ describe PuppyBreeder::Repositories::PuppyRepo do
   let(:breeder) { PuppyBreeder::Breeder.new("Puppymaster")}
 
 	before(:each) do
+    PuppyBreeder.breeds_request_repo.drop_tables
     PuppyBreeder.purchase_repo.drop_tables
     PuppyBreeder.puppy_repo.drop_tables
     PuppyBreeder.breeds_repo.drop_tables
@@ -18,6 +19,7 @@ describe PuppyBreeder::Repositories::PuppyRepo do
     PuppyBreeder.breeds_repo.create_tables
     PuppyBreeder.puppy_repo.create_tables
     PuppyBreeder.purchase_repo.create_tables
+    PuppyBreeder.breeds_request_repo.create_tables
 	end
 
 	describe "#add_puppy" do
