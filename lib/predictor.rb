@@ -19,7 +19,7 @@ class Predictor
     #   :physics => ...,
     #   ...
     # }
-    @all_books = load_books(:training)
+    @all_books = load_books(:test)
   end
 
   # Public: Trains the predictor on books in our dataset. This method is called
