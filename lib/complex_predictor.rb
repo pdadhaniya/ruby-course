@@ -20,7 +20,7 @@ class ComplexPredictor < Predictor
     #   }
     # }
 
-    @data = Hash.new(0)
+    # @data = Hash.new(0)
     # @all_books.each do |category, books|
     #   @data[category] = {
     #     words: 0,
@@ -61,40 +61,7 @@ class ComplexPredictor < Predictor
       end
     end
 
-    # @top_fifty_astronomy = Hash.new(0)
-    # @sorted_words_astronomy = (@category_word_count[:astronomy]).sort { |a, b| b[1]<=>a[1]}
-    # a = 0
-    # while a < 100
-    #   @top_fifty_astronomy[@sorted_words_astronomy[a][0]] = @sorted_words_astronomy[a][1]
-    #   a += 1
-    # end
-
-    # @top_fifty_philosophy = Hash.new(0)
-    # @sorted_words_philosophy = (@category_word_count[:philosophy]).sort { |a, b| b[1]<=>a[1]}
-    # b = 0
-    # while b < 100
-    #   @top_fifty_philosophy[@sorted_words_philosophy[b][0]] = @sorted_words_philosophy[b][1]
-    #   b += 1
-    # end
-
-    # @top_fifty_archeology = Hash.new(0)
-    # @sorted_words_archeology = (@category_word_count[:archeology]).sort { |a, b| b[1]<=>a[1]}
-    # c = 0
-    # while c < 100
-    #   @top_fifty_archeology[@sorted_words_archeology[c][0]] = @sorted_words_archeology[c][1]
-    #   c += 1
-    # end
-
-    # @top_fifty_religion = Hash.new(0)
-    # @sorted_words_religion = (@category_word_count[:religion]).sort { |a, b| b[1]<=>a[1]}
-    # d = 0
-    # while d < 100
-    #   @top_fifty_religion[@sorted_words_religion[d][0]] = @sorted_words_religion[d][1]
-    #   d += 1
-    # end
-
-    # @top_fifty = {:astronomy => @top_fifty_astronomy, :philosophy => @top_fifty_philosophy, :archeology => @top_fifty_archeology, :religion => @top_fifty_religion}
-
+    
   end
 
 
@@ -120,10 +87,6 @@ class ComplexPredictor < Predictor
     @test_top_fifty.each do |word, count|
       @test_array << word
     end
-    # @astronomy_count = 0
-    # @archeology_count = 0
-    # @philosophy_count = 0
-    # @religion_count = 0
 
     @pop_word = Hash.new(0)
     @top_words.each do |category, word_count|
@@ -140,23 +103,7 @@ class ComplexPredictor < Predictor
 
     winner = @pop_word.max_by { |k, v| v }
     return winner[0]
-    # @test_array.each do |x|
 
-    #   @astronomy_count += 1 if (@top_words[:astronomy]).key?(x)
-    #   @archeology_count += 1 if (@top_words[:archeology]).key?(x)
-    #   @philosophy_count += 1 if (@top_words[:philosophy]).key?(x)
-    #   @religion_count += 1 if (@top_words[:religion]).key?(x)
-    # end
-    # if @astronomy_count > @archeology_count && @astronomy_count > @philosophy_count && @astronomy_count > @religion_count
-    #   :astronomy
-    # elsif @archeology_count > @philosophy_count && @archeology_count > @religion_count
-    #   :archeology
-    # elsif @philosophy_count > @religion_count
-    #   :philosophy
-    # else
-    #   :religion
-    # end
-    # :astronomy
   end
 end
 
