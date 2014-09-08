@@ -31,7 +31,6 @@ describe PuppyBreeder::Repositories::PurchaseRequestRepo do
       breed2
       PuppyBreeder.puppy_repo.add_puppy(bob, breeder)
       result = PuppyBreeder.purchase_repo.add_purchase_request(['pitbull'], customer)
-      binding.pry
       expect(result[-1]["id"]).to eq('1')
       # expect(result.entries[0]["breed_id"]).to eq('2')
       expect(result[-1]["customer_id"]).to eq('1')

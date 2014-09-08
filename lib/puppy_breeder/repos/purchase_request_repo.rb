@@ -10,7 +10,6 @@ module PuppyBreeder
         #result = @db.exec(sql).entries returns array of hashes
 
       def add_purchase_request(breed, customer)
-        # breed_id_array = []
         breed.map! do |a_breed|
           PuppyBreeder.breeds_repo.get_breed_id(a_breed)
         end
@@ -23,8 +22,6 @@ module PuppyBreeder
         SQL
         result = @db.exec(command).entries
 
-        # PuppyBreeder.breeds_request_repo.update_breeds_request(breed, result[-1]["id"])
-        # pr_id = result[-1]["id"]
         breed.each do |x|
           PuppyBreeder.breeds_request_repo.update_breeds_request(result[-1]["id"], x)
         end
@@ -32,31 +29,14 @@ module PuppyBreeder
 
       end
 
-      def update_breeds_request(breed, pr_id)
-        command = <<-SQL
-        INSERT INTO breeds_request( purchase_request_id, breeds_id )
-        VALUES ( '#{pr_id}', '#{breed}' )
-        RETURNING *;
-        SQL
-        result = @db.exec(command)
-      end
-
-      #def unavailable
-      #if puppies table is updated with a puppy with status unavailable, change to pending
-
-      def get_pr_id(result)
-        result[0]["id"]
-      end
 
 
       def deny_request(breed, customer)
-        # breed_id = PuppyBreeder.breeds_repo.get_breed_id(breed)
         sql = "UPDATE purchase_request SET ( status ) = ( 'denied' ) WHERE customer_id='#{customer.id}' RETURNING *"
         result = @db.exec(sql)
       end
 
       def complete_request(breed, customer)
-        # breed_id = PuppyBreeder.breeds_repo.get_breed_id(breed)
         sql = "UPDATE purchase_request SET ( status ) = ( 'completed' ) WHERE customer_id='#{customer.id}' RETURNING *"
         result = @db.exec(sql)
       end

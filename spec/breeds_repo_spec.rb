@@ -30,7 +30,8 @@ describe PuppyBreeder::Repositories::BreedsRepo do
     it "should return the id from the breeds table of the breed input" do #works
       breed1
       result = PuppyBreeder.breeds_repo.get_breed_id("collie")
-      expect(result).to eq('1')
+      # binding.pry
+      expect(result).to eq(1)
     end #done
   end
 

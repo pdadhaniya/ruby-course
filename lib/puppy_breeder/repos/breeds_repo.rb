@@ -15,9 +15,10 @@ module PuppyBreeder
 
       def get_breed_id(breed)
         sql = "SELECT * FROM breeds WHERE breed='#{breed}'"
-        result = @db.exec(sql)
-        id = result[0]["id"]
-        id
+        result = @db.exec(sql).first
+        x = result["id"]
+        y = x.to_i
+        return y
       end
 
 

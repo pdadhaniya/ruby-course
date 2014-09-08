@@ -17,6 +17,11 @@ module PuppyBreeder
         result = @db.exec(command)
       end
 
+      def view_breeds_request
+        sql = "SELECT * FROM breeds_request"
+        result = @db.exec(sql)
+      end
+
 
 
       def drop_tables
