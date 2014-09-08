@@ -55,7 +55,7 @@ class ComplexPredictor < Predictor
 
     @top_words.each do |category, words_hash|
       p = 0
-      while p < 10
+      while p < 100
         @top_words[category][@sorted_words[category][p][0]] = @sorted_words[category][p][1]
         p += 1
       end
