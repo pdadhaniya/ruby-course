@@ -32,12 +32,12 @@ class ComplexPredictor < Predictor
     #   end
     # end 
     @category_word_count = {}
-    @total = 0
+    # @total = 0
     @all_books.each do |category, books|
       @category_word_count[category] = Hash.new(0)
       books.each do |filename, tokens|
         tokens.each do |x|
-          @total += 1 if good_token?(x)
+          # @total += 1 if good_token?(x)
           @category_word_count[category][x] += 1 if good_token?(x)
         end
       end
@@ -77,15 +77,11 @@ class ComplexPredictor < Predictor
       @word_tally[da_word] += 1 if good_token?(da_word)
     end
     @sorted_word_tally = @word_tally.sort { |a, b| b[1]<=>a[1]}
-    @test_top_fifty = Hash.new(0)
+    @test_top = Hash.new(0)
     e = 0
     while e < 100
-      @test_top_fifty[@sorted_word_tally[e][0]] = @sorted_word_tally[e][1]
+      @test_top[@sorted_word_tally[e][0]] = @sorted_word_tally[e][1]
       e += 1
-    end
-    @test_array = []
-    @test_top_fifty.each do |word, count|
-      @test_array << word
     end
 
     @pop_word = Hash.new(0)
@@ -96,7 +92,7 @@ class ComplexPredictor < Predictor
     @pop_word.each do |category, count|
       q = 0
       while q < 100
-        @pop_word[category] += 1 if (@top_words[category]).key?(@test_array[q])
+        @pop_word[category] += 1 if (@top_words[category]).key?(@test_top.keys[q])
         q += 1
       end
     end
