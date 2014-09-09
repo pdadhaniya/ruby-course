@@ -21,8 +21,17 @@ describe Songify::Repositories::SongsRepo do
     it "should remove a song from the songs table" do
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.delete_song(song1)
-      binding.pry
       expect(result.entries).to eq([])
+    end
+  end
+
+  describe "#get_song" do
+    it "should return the requested song" do
+      Songify.songs_repo.save_song(song1)
+      result = Songify.songs_repo.get_song(song1)
+      # binding.pry
+      expect(result["name"]).to eq("Happy Birthday")
+      expect(result["id"]).to eq("1")
     end
   end
 

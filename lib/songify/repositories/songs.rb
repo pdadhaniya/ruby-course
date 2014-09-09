@@ -28,6 +28,15 @@ module Songify
         result = @db.exec(command)
       end
 
+      def get_song(song)
+        command = <<-SQL
+        SELECT * FROM songs WHERE id='#{song.id}'
+        SQL
+        result = @db.exec(command).first
+      end
+
+      
+
       def create_tables
         command = <<-SQL
         CREATE TABLE IF NOT EXISTS songs (id SERIAL PRIMARY KEY, name TEXT)
