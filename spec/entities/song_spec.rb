@@ -5,7 +5,7 @@ describe Songify::Song do
 
   describe "#initialize" do
     it "should make a new song" do
-      expect(song1.name).to eq("Happy Birthday")
+      expect(song1.title).to eq("Happy Birthday")
     end
   end
 

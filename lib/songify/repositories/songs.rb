@@ -11,8 +11,8 @@ module Songify
       def save_song(song)
         if song.id.nil?
           command = <<-SQL
-          INSERT INTO songs ( name )
-          VALUES ( '#{song.name}' )
+          INSERT INTO songs ( title )
+          VALUES ( '#{song.title}' )
           RETURNING *;
           SQL
           result = @db.exec(command).first
@@ -44,7 +44,7 @@ module Songify
 
       def create_tables
         command = <<-SQL
-        CREATE TABLE IF NOT EXISTS songs (id SERIAL PRIMARY KEY, name TEXT)
+        CREATE TABLE IF NOT EXISTS songs (id SERIAL PRIMARY KEY, title TEXT)
         SQL
         result = @db.exec(command)
       end

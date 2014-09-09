@@ -1,11 +1,11 @@
 #Refer to this class as Songify::Song
 module Songify
   class Song
-  attr_reader :name
+  attr_reader :title
   attr_accessor :id
 
-    def initialize(name)
-      @name = name
+    def initialize(title)
+      @title = title
       @id = nil
     end
 

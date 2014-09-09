@@ -11,7 +11,7 @@ describe Songify::Repositories::SongsRepo do
   describe "#save_song" do
     it "should save a song to the songs table" do
       result = Songify.songs_repo.save_song(song1)
-      expect(result["name"]).to eq("Happy Birthday")
+      expect(result["title"]).to eq("Happy Birthday")
       expect(result["id"]).to eq("1")
       expect(song1.id).to eq(1)
     end
@@ -29,7 +29,7 @@ describe Songify::Repositories::SongsRepo do
     it "should return the requested song" do
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.get_song(song1)
-      expect(result["name"]).to eq("Happy Birthday")
+      expect(result["title"]).to eq("Happy Birthday")
       expect(result["id"]).to eq("1")
     end
   end
@@ -42,9 +42,9 @@ describe Songify::Repositories::SongsRepo do
       result = Songify.songs_repo.get_all_songs
       # binding.pry
       expect(result[0]["id"]).to eq("1")
-      expect(result[0]["name"]).to eq("Happy Birthday")
+      expect(result[0]["title"]).to eq("Happy Birthday")
       expect(result[1]["id"]).to eq("2")
-      expect(result[1]["name"]).to eq("Hotel California")
+      expect(result[1]["title"]).to eq("Hotel California")
     end
   end
 
