@@ -16,7 +16,8 @@ module Songify
           RETURNING *;
           SQL
           result = @db.exec(command).first
-          # song.instance_variable_set("@id", (result[0]["id"]).to_i)
+          song.instance_variable_set("@id", (result["id"]).to_i)
+          result
         end
       end
 

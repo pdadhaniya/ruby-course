@@ -14,7 +14,7 @@ describe Songify::Repositories::SongsRepo do
       binding.pry
       expect(result["name"]).to eq("Happy Birthday")
       expect(result["id"]).to eq("1")
-      # expect(song1.id).to eq(1)
+      expect(song1.id).to eq(1)
     end
   end
 
