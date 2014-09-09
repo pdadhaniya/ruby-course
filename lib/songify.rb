@@ -4,4 +4,4 @@ module Songify
 end
 
 
-require_relative 'entities/song.rb'
+require_relative 'songify/entities/song.rb'
