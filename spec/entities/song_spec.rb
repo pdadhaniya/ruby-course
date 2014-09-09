@@ -1,4 +1,4 @@
-require_relative 'spec_helper.rb'
+require_relative '../spec_helper.rb'
 
 describe Songify::Song do 
   let(:song1) { Songify::Song.new("The Prayer", "Kid Cudi")}
