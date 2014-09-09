@@ -21,6 +21,13 @@ module Songify
         end
       end
 
+      def delete_song(song)
+        command = <<-SQL
+        DELETE FROM songs WHERE id='#{song.id}'
+        SQL
+        result = @db.exec(command)
+      end
+
       def create_tables
         command = <<-SQL
         CREATE TABLE IF NOT EXISTS songs (id SERIAL PRIMARY KEY, name TEXT)
