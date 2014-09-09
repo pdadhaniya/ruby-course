@@ -35,7 +35,12 @@ module Songify
         result = @db.exec(command).first
       end
 
-      
+      def get_all_songs
+        command = <<-SQL
+        SELECT * FROM songs
+        SQL
+        result = @db.exec(command).entries
+      end
 
       def create_tables
         command = <<-SQL

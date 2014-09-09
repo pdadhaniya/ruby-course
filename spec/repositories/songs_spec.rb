@@ -29,12 +29,24 @@ describe Songify::Repositories::SongsRepo do
     it "should return the requested song" do
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.get_song(song1)
-      # binding.pry
       expect(result["name"]).to eq("Happy Birthday")
       expect(result["id"]).to eq("1")
     end
   end
 
+  describe "#get_all_songs" do
+    it "should return all songs in the songs table" do
+      song2 = Songify::Song.new("Hotel California")
+      Songify.songs_repo.save_song(song1)
+      Songify.songs_repo.save_song(song2)
+      result = Songify.songs_repo.get_all_songs
+      # binding.pry
+      expect(result[0]["id"]).to eq("1")
+      expect(result[0]["name"]).to eq("Happy Birthday")
+      expect(result[1]["id"]).to eq("2")
+      expect(result[1]["name"]).to eq("Hotel California")
+    end
+  end
 
 
 
