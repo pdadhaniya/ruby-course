@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Songs Index</title>
+</head>
+<body>
+  <h1>Song Titles</h1>
+  <ul>
+    <% @songs.each do |song| %>
+      <li><%= song["title"] %></li>
+    <% end %>
+  </ul>
+</body>
+</html>  
