@@ -22,6 +22,16 @@ describe Songify::Server do
     end
   end
 
+  describe 'GET /songs/new' do
+    it "should show the form to save a new song" do
+      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday"))
+      Songify.songs_repo.save_song(Songify::Song.new("Hotel California"))
+      get '/songs/new'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Title:"
+    end
+
+  end
 
   describe 'GET /songs/:id' do
     it "should show the title of the song who's id was searched for" do
@@ -36,11 +46,6 @@ describe Songify::Server do
   end
 
 
-  describe 'GET /songs/new' do
-
-
-
-  end
 
 
   describe 'POST /songs' do

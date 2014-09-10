@@ -11,10 +11,16 @@ set :bind, '0.0.0.0'
     erb :index
   end
 
+  get '/songs/new' do
+    @new = Songify.songs_repo
+    erb :save
+  end
+  
   get '/songs/:id' do
     @song = Songify.songs_repo.get_song(params[:id])
     erb :result
   end
+
 
 
 
