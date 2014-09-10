@@ -28,9 +28,9 @@ module Songify
         result = @db.exec(command)
       end
 
-      def get_song(song)
+      def get_song(id)
         command = <<-SQL
-        SELECT * FROM songs WHERE id='#{song.id}'
+        SELECT * FROM songs WHERE id='#{id}'
         SQL
         result = @db.exec(command).first
       end

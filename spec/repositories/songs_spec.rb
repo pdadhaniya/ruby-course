@@ -28,7 +28,7 @@ describe Songify::Repositories::SongsRepo do
   describe "#get_song" do
     it "should return the requested song" do
       Songify.songs_repo.save_song(song1)
-      result = Songify.songs_repo.get_song(song1)
+      result = Songify.songs_repo.get_song(1)
       expect(result["title"]).to eq("Happy Birthday")
       expect(result["id"]).to eq("1")
     end
