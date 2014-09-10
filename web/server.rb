@@ -6,12 +6,15 @@ require 'sinatra/base'
 class Songify::Server < Sinatra::Application
 set :bind, '0.0.0.0'
 
-  get '/' do
+  get '/songs' do
     @songs = Songify.songs_repo.get_all_songs
     erb :index
   end
 
-
+  get '/songs/:id' do
+    @song = Songify.songs_repo.get_song(params[:id])
+    erb :result
+  end
 
 
 
