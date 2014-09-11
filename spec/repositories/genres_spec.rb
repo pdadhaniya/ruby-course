@@ -27,6 +27,14 @@ describe Songify::Repositories::GenresRepo do
     end
   end
 
+  describe "get_genre_id" do
+    it "should return the id of the genre requested" do
+      Songify.genres_repo.save_genre(genre1)
+      result = Songify.genres_repo.get_genre_id("Rap")
+      expect(result).to eq(1)
+    end
+  end
+
   describe "#delete_genre" do
     it "should remove a genre from the genres table" do
       Songify.genres_repo.save_genre(genre1)
