@@ -10,6 +10,11 @@ set :bind, '0.0.0.0'
     erb :index
   end
 
+  get '/genres' do
+    @genres = Songify.genres_repo.get_all_genres
+    erb :genre_index
+  end
+
   get '/songs/new' do
     erb :save
   end
@@ -42,11 +47,6 @@ set :bind, '0.0.0.0'
     @song = Songify.songs_repo.get_song(params[:id])
     erb :result
   end
-
-  # get '/songs/:id/delete' do
-  #   @song_to_remove = Songify.songs_repo.get_song(params[:id])
-  #   erb :remove
-  # end
 
 run! if app_file == $0 #what does this mean?!?!
 

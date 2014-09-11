@@ -13,8 +13,9 @@ describe Songify::Server do
     Songify::Server.new
   end
 
+  #SONGS
   describe "GET /songs" do
-    it "loads the homepage" do
+    it "loads the songs homepage" do
       Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday"))
       Songify.songs_repo.save_song(Songify::Song.new("Hotel California"))
 
@@ -83,11 +84,76 @@ describe Songify::Server do
     end
   end
 
+  #GENRES
+  describe "GET /genres" do
+    it "loads the genres homepage" do
+      Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
+      Songify.genres_repo.save_genre(Songify::Genre.new("Classical"))
 
+      get '/genres'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Rap", "Classical"
+    end
+  end
 
+  describe 'GET /genres/new' do
+    xit "should show the form to save a new genre" do
+      get '/genres/new'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Title:"
+    end
+  end
 
+  describe 'GET /genres/:id' do
+    xit "should show the type of the genre who's id was searched for" do
+      Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
+      Songify.genres_repo.save_genre(Songify::Genre.new("Classical"))
 
+      get '/genres/2'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Classical"
+    end
+  end
 
+  describe 'POST /genres' do
+    xit "should save the inputted genre into the genres database and redirect to that genres page" do
+      
+      post '/genres', { "genre-type" => "Hip-Hop"}
+      expect(last_response.status).to eq(302)
+      last_genre = Songify.genres_repo.get_all_genres.last
+      expect(last_genre["type"]).to eq("Hip-Hop")
+    end
+  end
+
+  describe 'GET /genres/:id/edit' do
+    xit "should show the form to edit a genre based on the id put in the link" do
+      Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
+
+      get '/genres/1/edit'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Title:"
+    end
+  end
+
+  describe 'PUT /genres/:id' do
+    xit "should update the genre type in the database and redirect to the page" do
+      Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
+
+      put '/genres/1', { "genre-type" => "Classical" }
+      expect(last_response.status).to eq(302)
+      last_genre = Songify.genres_repo.get_all_genres.last
+      expect(last_genre["type"]).to eq("Classical")
+    end
+  end
+
+  describe 'DELETE /genres/' do
+    xit "should remove the genre from the database" do
+      Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
+
+      delete '/genres/1', { "genre-type" => "Rap"}
+      expect(last_response).to be_redirect
+    end
+  end
 
 
 
