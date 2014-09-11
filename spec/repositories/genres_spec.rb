@@ -45,8 +45,13 @@ describe Songify::Repositories::GenresRepo do
   end
 
   describe "#get_all_genres" do
-    xit "should return all genres in the genres table" do
-
+    it "should return all genres in the genres table" do
+      genre2 = Songify::Genre.new("Classical")
+      Songify.genres_repo.save_genre(genre1)
+      Songify.genres_repo.save_genre(genre2)
+      result = Songify.genres_repo.get_all_genres
+      expect(result[0]["type"]).to eq("Rap")
+      expect(result[1]["type"]).to eq("Classical")
     end
   end
 
