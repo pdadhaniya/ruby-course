@@ -28,6 +28,13 @@ module Songify
         end
       end
 
+      def delete_genre(genre)
+        command = <<-SQL
+        DELETE FROM genres WHERE  id='#{genre.id}';
+        SQL
+        result = @db.exec(command)
+      end
+
 
 
       def create_tables
