@@ -42,6 +42,13 @@ module Songify
         result = @db.exec(command).first
       end
 
+      def get_all_genres
+        command = <<-SQL
+        SELECT * FROM genres;
+        SQL
+        result = @db.exec(command).entries
+      end
+
       def create_tables
         command = <<-SQL
         CREATE TABLE IF NOT EXISTS genres (id SERIAL PRIMARY KEY, type TEXT);
