@@ -8,7 +8,7 @@
 
   <form action="/songs/<%=@song_to_edit["id"]%>" method="post">
     <label for="title">Title:</label>
-    <input name="song-title" id="title" type="text">
+    <input name="song-title" id="title" type="text" value="<%=@song_to_edit['title']%>">
     <input name="_method" type="hidden" value="put"><br>
 
     <input type="submit">
