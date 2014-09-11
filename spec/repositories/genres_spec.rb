@@ -27,11 +27,11 @@ describe Songify::Repositories::GenresRepo do
     end
   end
 
-
-
   describe "#delete_genre" do
-    xit "should remove a genre from the genres table" do
-
+    it "should remove a genre from the genres table" do
+      Songify.genres_repo.save_genre(genre1)
+      result = Songify.genres_repo.delete_genre(genre1)
+      expect(result.entries).to eq([])
     end
   end
 
