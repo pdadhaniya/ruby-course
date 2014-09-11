@@ -21,13 +21,14 @@ set :bind, '0.0.0.0'
   end
 
   put '/songs/:id' do
-    song = Songify::Song.new(params["song-title"])
+    song = Songify::Song.new(params["song-title"], params["id"])
+    # binding.pry
     Songify.songs_repo.save_song(song)
     redirect to ("/songs/#{song.id}")
   end
 
   get '/songs/:id/edit' do
-    # @edited_song = Songify.songs_repo.get_song(params[:id])
+    @song_to_edit = Songify.songs_repo.get_song(params[:id])
     erb :edit
   end
 
@@ -36,9 +37,6 @@ set :bind, '0.0.0.0'
     erb :result
   end
 
-
-
 run! if app_file == $0 #what does this mean?!?!
-
 
 end

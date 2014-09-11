@@ -61,6 +61,17 @@ describe Songify::Server do
     end
   end
 
+  describe 'PUT /songs/' do
+    it "should update the song title in the database and redirect to the page" do
+      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday"))
+
+      put '/songs/1', { "song-title" => "Parag Dadhaniya" }
+      expect(last_response.status).to eq(302)
+      last_song = Songify.songs_repo.get_all_songs.last
+      expect(last_song["title"]).to eq("Parag Dadhaniya")
+    end
+  end
+
 
 
 end

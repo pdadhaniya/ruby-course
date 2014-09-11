@@ -20,7 +20,8 @@ module Songify
           result
         else
           command = <<-SQL
-          UPDATE songs SET ( title ) = ( '#{song.title}' ) WHERE id='{song.id}' 
+          UPDATE songs SET ( title ) = ( '#{song.title}' )
+          WHERE id='#{song.id.to_i}'; 
           SQL
           result = @db.exec(command).first
         end
@@ -28,14 +29,14 @@ module Songify
 
       def delete_song(song)
         command = <<-SQL
-        DELETE FROM songs WHERE id='#{song.id}'
+        DELETE FROM songs WHERE id='#{song.id}';
         SQL
         result = @db.exec(command)
       end
 
       def get_song(id)
         command = <<-SQL
-        SELECT * FROM songs WHERE id='#{id}'
+        SELECT * FROM songs WHERE id='#{id}';
         SQL
         result = @db.exec(command).first
       end

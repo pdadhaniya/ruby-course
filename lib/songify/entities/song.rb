@@ -4,9 +4,9 @@ module Songify
   attr_reader :title
   attr_accessor :id
 
-    def initialize(title)
+    def initialize(title, id=nil)
       @title = title
-      @id = nil
+      @id = id
     end
 
 

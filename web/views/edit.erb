@@ -6,7 +6,7 @@
 <body>
   <h1>Edit a Song</h1>
 
-  <form action="/songs" method="post">
+  <form action="/songs/<%=@song_to_edit["id"]%>" method="post">
     <label for="title">Title:</label>
     <input name="song-title" id="title" type="text">
     <input name="_method" type="hidden" value="put"><br>
