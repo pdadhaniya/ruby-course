@@ -1,7 +1,6 @@
 require_relative '../lib/songify.rb'
 require 'sinatra/base'
-# require 'rubygems'
-
+require 'pry-byebug'
 
 class Songify::Server < Sinatra::Application
 set :bind, '0.0.0.0'
@@ -12,10 +11,16 @@ set :bind, '0.0.0.0'
   end
 
   get '/songs/new' do
-    @new = Songify.songs_repo
     erb :save
   end
-  
+
+
+  post '/songs' do
+    song = Songify::Song.new(params["song-title"])
+    Songify.songs_repo.save_song(song)
+    redirect to("/songs/#{song.id}")
+  end
+
   get '/songs/:id' do
     @song = Songify.songs_repo.get_song(params[:id])
     erb :result
@@ -23,10 +28,7 @@ set :bind, '0.0.0.0'
 
 
 
-
-
 run! if app_file == $0 #what does this mean?!?!
 
 
 end
-
