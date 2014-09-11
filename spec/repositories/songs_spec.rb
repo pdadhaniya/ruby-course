@@ -5,6 +5,8 @@ describe Songify::Repositories::SongsRepo do
 
   before(:each) do
     Songify.songs_repo.drop_tables
+    Songify.genres_repo.drop_tables
+    Songify.genres_repo.create_tables
     Songify.songs_repo.create_tables
   end
 
