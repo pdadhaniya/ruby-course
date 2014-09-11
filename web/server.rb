@@ -14,11 +14,21 @@ set :bind, '0.0.0.0'
     erb :save
   end
 
-
   post '/songs' do
     song = Songify::Song.new(params["song-title"])
     Songify.songs_repo.save_song(song)
     redirect to("/songs/#{song.id}")
+  end
+
+  put '/songs/:id' do
+    song = Songify::Song.new(params["song-title"])
+    Songify.songs_repo.save_song(song)
+    redirect to ("/songs/#{song.id}")
+  end
+
+  get '/songs/:id/edit' do
+    # @edited_song = Songify.songs_repo.get_song(params[:id])
+    erb :edit
   end
 
   get '/songs/:id' do

@@ -18,6 +18,11 @@ module Songify
           result = @db.exec(command).first
           song.instance_variable_set("@id", (result["id"]).to_i)
           result
+        else
+          command = <<-SQL
+          UPDATE songs SET ( title ) = ( '#{song.title}' ) WHERE id='{song.id}' 
+          SQL
+          result = @db.exec(command).first
         end
       end
 

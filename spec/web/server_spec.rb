@@ -28,7 +28,6 @@ describe Songify::Server do
       expect(last_response).to be_ok
       expect(last_response.body).to include "Title:"
     end
-
   end
 
   describe 'GET /songs/:id' do
@@ -40,7 +39,6 @@ describe Songify::Server do
       expect(last_response).to be_ok
       expect(last_response.body).to include "Hotel California"
     end
-
   end
 
   describe 'POST /songs' do
@@ -51,9 +49,16 @@ describe Songify::Server do
       last_song = Songify.songs_repo.get_all_songs.last
       expect(last_song["title"]).to eq("Stairway to Heaven")
     end
+  end
 
+  describe 'GET /songs/:id/edit' do
+    it "should show the form to edit a song based on the id put in the link" do
+      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday"))
 
-
+      get '/songs/1/edit'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Title:"
+    end
   end
 
 
