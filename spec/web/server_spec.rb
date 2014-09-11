@@ -97,15 +97,15 @@ describe Songify::Server do
   end
 
   describe 'GET /genres/new' do
-    xit "should show the form to save a new genre" do
+    it "should show the form to save a new genre" do
       get '/genres/new'
       expect(last_response).to be_ok
-      expect(last_response.body).to include "Title:"
+      expect(last_response.body).to include "Type:"
     end
   end
 
   describe 'GET /genres/:id' do
-    xit "should show the type of the genre who's id was searched for" do
+    it "should show the type of the genre who's id was searched for" do
       Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
       Songify.genres_repo.save_genre(Songify::Genre.new("Classical"))
 
@@ -116,7 +116,7 @@ describe Songify::Server do
   end
 
   describe 'POST /genres' do
-    xit "should save the inputted genre into the genres database and redirect to that genres page" do
+    it "should save the inputted genre into the genres database and redirect to that genres page" do
       
       post '/genres', { "genre-type" => "Hip-Hop"}
       expect(last_response.status).to eq(302)
@@ -126,17 +126,17 @@ describe Songify::Server do
   end
 
   describe 'GET /genres/:id/edit' do
-    xit "should show the form to edit a genre based on the id put in the link" do
+    it "should show the form to edit a genre based on the id put in the link" do
       Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
 
       get '/genres/1/edit'
       expect(last_response).to be_ok
-      expect(last_response.body).to include "Title:"
+      expect(last_response.body).to include "Type:"
     end
   end
 
   describe 'PUT /genres/:id' do
-    xit "should update the genre type in the database and redirect to the page" do
+    it "should update the genre type in the database and redirect to the page" do
       Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
 
       put '/genres/1', { "genre-type" => "Classical" }
@@ -147,7 +147,7 @@ describe Songify::Server do
   end
 
   describe 'DELETE /genres/' do
-    xit "should remove the genre from the database" do
+    it "should remove the genre from the database" do
       Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
 
       delete '/genres/1', { "genre-type" => "Rap"}

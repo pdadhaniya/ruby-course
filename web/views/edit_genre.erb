@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Genre</title>
+</head>
+<body>
+  <h1>Edit a Genre</h1>
+
+  <form action="/genres/<%=@genre_to_edit["id"]%>" method="post">
+    <label for="title">Type:</label>
+    <input name="genre-type" id="title" type="text" value="<%=@genre_to_edit['type']%>">
+    <input name="_method" type="hidden" value="put"><br>
+
+    <input type="submit">
+  </form>
+
+  <form action="/genres/<%=@genre_to_edit["id"]%>" method="post">
+    <input name="genre-type" type="hidden" value="<%=@genre_to_edit['type']%>">
+    <input name="id" type="hidden" value="<%=@genre_to_edit['id']%>">
+    <input name="_method" type="hidden" value="delete"><br>
+
+    <input type="submit" value="Delete">
+  </form>
+
+
+</body>
+</html>  
