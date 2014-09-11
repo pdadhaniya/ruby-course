@@ -36,8 +36,11 @@ describe Songify::Repositories::GenresRepo do
   end
 
   describe "#get_genre" do
-    xit "should return the requested genre" do
-
+    it "should return the requested genre" do
+      Songify.genres_repo.save_genre(genre1)
+      result = Songify.genres_repo.get_genre(1)
+      expect(result["type"]).to eq("Rap")
+      expect(result["id"]).to eq("1")
     end
   end
 
