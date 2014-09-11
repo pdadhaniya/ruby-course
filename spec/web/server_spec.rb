@@ -63,7 +63,7 @@ describe Songify::Server do
     end
   end
 
-  describe 'PUT /songs/' do
+  describe 'PUT /songs/:id' do
     it "should update the song title in the database and redirect to the page" do
       Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday"))
 
@@ -73,6 +73,23 @@ describe Songify::Server do
       expect(last_song["title"]).to eq("Parag Dadhaniya")
     end
   end
+
+  describe 'DELETE /songs/' do
+    it "should remove the song from the database" do
+      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday"))
+
+      delete '/songs/1', { "song-title" => "Happy Birthday"}
+      expect(last_response).to be_redirect
+    end
+  end
+
+
+
+
+
+
+
+
 
 
 

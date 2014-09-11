@@ -13,5 +13,15 @@
 
     <input type="submit">
   </form>
+
+  <form action="/songs/<%=@song_to_edit["id"]%>" method="post">
+    <input name="song-title" type="hidden" value="<%=@song_to_edit['title']%>">
+    <input name="id" type="hidden" value="<%=@song_to_edit['id']%>">
+    <input name="_method" type="hidden" value="delete"><br>
+
+    <input type="submit" value="Delete">
+  </form>
+
+
 </body>
 </html>  
