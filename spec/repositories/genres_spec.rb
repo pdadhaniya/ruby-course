@@ -18,11 +18,10 @@ describe Songify::Repositories::GenresRepo do
       expect(genre1.id).to eq(1)
     end
 
-    xit "should update a genre in genres table if that genre id exists" do
+    it "should update a genre in genres table if that genre id exists" do
       Songify.genres_repo.save_genre(genre1)
-      binding.pry
       genre1.type = "Classical"
-      Songify.genres_repo.save_genre(genre1)
+      result = Songify.genres_repo.save_genre(genre1)
       expect(result["type"]).to eq("Classical")
       expect(result["id"]).to eq("1")
     end

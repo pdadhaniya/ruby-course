@@ -21,7 +21,8 @@ module Songify
         else
           command = <<-SQL
           UPDATE genres SET ( type ) = ( '#{genre.type}' )
-          WHERE id='#{genre.id}';
+          WHERE id='#{genre.id}'
+          RETURNING *;
           SQL
           result = @db.exec(command).first
         end
