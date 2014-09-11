@@ -1,7 +1,7 @@
 require_relative '../spec_helper.rb'
 
 describe Songify::Repositories::GenresRepo do
-
+  let(:genre1) { Songify::Genre.new("Rap") }
 
   before(:each) do
     Songify.songs_repo.drop_tables
@@ -11,7 +11,20 @@ describe Songify::Repositories::GenresRepo do
   end
 
   describe "#save_genre" do
-    xit "should save a genre to the genres table" do
+    it "should save a genre to the genres table" do
+      result = Songify.genres_repo.save_genre(genre1)
+      expect(result["type"]).to eq("Rap")
+      expect(result["id"]).to eq("1")
+      expect(genre1.id).to eq(1)
+    end
+
+    xit "should update a genre in genres table if that genre id exists" do
+      Songify.genres_repo.save_genre(genre1)
+      binding.pry
+      genre1.type = "Classical"
+      Songify.genres_repo.save_genre(genre1)
+      expect(result["type"]).to eq("Classical")
+      expect(result["id"]).to eq("1")
     end
   end
 
