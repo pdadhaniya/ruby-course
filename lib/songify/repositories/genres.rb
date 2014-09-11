@@ -35,7 +35,12 @@ module Songify
         result = @db.exec(command)
       end
 
-
+      def get_genre(id)
+        command = <<-SQL
+        SELECT * FROM genres WHERE id='#{id}';
+        SQL
+        result = @db.exec(command).first
+      end
 
       def create_tables
         command = <<-SQL
