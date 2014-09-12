@@ -8,7 +8,9 @@
 
   <form action="/songs/<%=@song_to_edit["id"]%>" method="post">
     <label for="title">Title:</label>
-    <input name="song-title" id="title" type="text" value="<%=@song_to_edit['title']%>">
+    <input name="song-title" id="title" type="text" value="<%=@song_to_edit['title']%>"><br>
+    <label for="genre">Genre:</label>
+    <input name="genre-type" id="genre" type="text" value="<%=(Songify.genres_repo.get_genre(@song_to_edit['genre']))['type']%>"><br>
     <input name="_method" type="hidden" value="put"><br>
 
     <input type="submit">
@@ -16,6 +18,7 @@
 
   <form action="/songs/<%=@song_to_edit["id"]%>" method="post">
     <input name="song-title" type="hidden" value="<%=@song_to_edit['title']%>">
+    <input name="genre-type" type="hidden" value="<%=@song_to_edit['genre']%>">
     <input name="id" type="hidden" value="<%=@song_to_edit['id']%>">
     <input name="_method" type="hidden" value="delete"><br>
 

@@ -9,11 +9,11 @@ describe Songify::Repositories::SongsRepo do
     Songify.genres_repo.drop_tables
     Songify.genres_repo.create_tables
     Songify.songs_repo.create_tables
+    Songify.genres_repo.save_genre(genre1)
   end
 
   describe "#save_song" do
     it "should save a song to the songs table" do
-      Songify.genres_repo.save_genre(genre1)
       result = Songify.songs_repo.save_song(song1)
       expect(result["title"]).to eq("Happy Birthday")
       expect(result["genre"]).to eq("1")
@@ -24,7 +24,6 @@ describe Songify::Repositories::SongsRepo do
 
   describe "#delete_song" do
     it "should remove a song from the songs table" do
-      Songify.genres_repo.save_genre(genre1)
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.delete_song(song1)
       expect(result.entries).to eq([])
@@ -33,7 +32,6 @@ describe Songify::Repositories::SongsRepo do
 
   describe "#get_song" do
     it "should return the requested song" do
-      Songify.genres_repo.save_genre(genre1)
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.get_song(1)
       expect(result["title"]).to eq("Happy Birthday")
@@ -44,7 +42,6 @@ describe Songify::Repositories::SongsRepo do
 
   describe "#get_all_songs" do
     it "should return all songs in the songs table" do
-      Songify.genres_repo.save_genre(genre1)
       genre2 = Songify::Genre.new("Classical")
       Songify.genres_repo.save_genre(genre2)
       song2 = Songify::Song.new("Hotel California", "Classical")

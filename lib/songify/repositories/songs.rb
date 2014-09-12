@@ -20,8 +20,9 @@ module Songify
           song.instance_variable_set("@id", (result["id"]).to_i)
           result
         else
+          genre_id = Songify::genres_repo.get_genre_id(song.genre)
           command = <<-SQL
-          UPDATE songs SET ( title ) = ( '#{song.title}' )
+          UPDATE songs SET ( title, genre ) = ( '#{song.title}', '#{genre_id}' )
           WHERE id='#{song.id.to_i}'; 
           SQL
           result = @db.exec(command).first
