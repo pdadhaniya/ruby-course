@@ -10,9 +10,10 @@ module Songify
 
       def save_song(song)
         if song.id.nil?
+          genre_id = Songify::genres_repo.get_genre_id(song.genre)
           command = <<-SQL
-          INSERT INTO songs ( title )
-          VALUES ( '#{song.title}' )
+          INSERT INTO songs ( title, genre )
+          VALUES ( '#{song.title}', '#{genre_id}' )
           RETURNING *;
           SQL
           result = @db.exec(command).first
@@ -50,7 +51,7 @@ module Songify
 
       def create_tables
         command = <<-SQL
-        CREATE TABLE IF NOT EXISTS songs (id SERIAL PRIMARY KEY, title TEXT)
+        CREATE TABLE IF NOT EXISTS songs (id SERIAL PRIMARY KEY, title TEXT, genre INTEGER REFERENCES genres (id));
         SQL
         result = @db.exec(command)
       end

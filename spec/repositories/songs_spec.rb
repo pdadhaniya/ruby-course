@@ -1,7 +1,8 @@
 require_relative '../spec_helper.rb'
 
 describe Songify::Repositories::SongsRepo do 
-  let(:song1) { Songify::Song.new("Happy Birthday")}
+  let(:genre1) { Songify::Genre.new("Rap")}
+  let(:song1) { Songify::Song.new("Happy Birthday", "Rap")}
 
   before(:each) do
     Songify.songs_repo.drop_tables
@@ -12,8 +13,10 @@ describe Songify::Repositories::SongsRepo do
 
   describe "#save_song" do
     it "should save a song to the songs table" do
+      Songify.genres_repo.save_genre(genre1)
       result = Songify.songs_repo.save_song(song1)
       expect(result["title"]).to eq("Happy Birthday")
+      expect(result["genre"]).to eq("1")
       expect(result["id"]).to eq("1")
       expect(song1.id).to eq(1)
     end
@@ -21,6 +24,7 @@ describe Songify::Repositories::SongsRepo do
 
   describe "#delete_song" do
     it "should remove a song from the songs table" do
+      Songify.genres_repo.save_genre(genre1)
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.delete_song(song1)
       expect(result.entries).to eq([])
@@ -29,24 +33,30 @@ describe Songify::Repositories::SongsRepo do
 
   describe "#get_song" do
     it "should return the requested song" do
+      Songify.genres_repo.save_genre(genre1)
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.get_song(1)
       expect(result["title"]).to eq("Happy Birthday")
       expect(result["id"]).to eq("1")
+      expect(result["genre"]).to eq("1")
     end
   end
 
   describe "#get_all_songs" do
     it "should return all songs in the songs table" do
-      song2 = Songify::Song.new("Hotel California")
+      Songify.genres_repo.save_genre(genre1)
+      genre2 = Songify::Genre.new("Classical")
+      Songify.genres_repo.save_genre(genre2)
+      song2 = Songify::Song.new("Hotel California", "Classical")
       Songify.songs_repo.save_song(song1)
       Songify.songs_repo.save_song(song2)
       result = Songify.songs_repo.get_all_songs
-      # binding.pry
       expect(result[0]["id"]).to eq("1")
       expect(result[0]["title"]).to eq("Happy Birthday")
+      expect(result[0]["genre"]).to eq("1")
       expect(result[1]["id"]).to eq("2")
       expect(result[1]["title"]).to eq("Hotel California")
+      expect(result[1]["genre"]).to eq("2")
     end
   end
 

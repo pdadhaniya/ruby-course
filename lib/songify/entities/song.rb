@@ -3,9 +3,11 @@ module Songify
   class Song
   attr_reader :title
   attr_accessor :id
+  attr_accessor :genre
 
-    def initialize(title, id=nil)
+    def initialize(title, genre, id=nil)
       @title = title
+      @genre = genre
       @id = id
     end
 
