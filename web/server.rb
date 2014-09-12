@@ -16,6 +16,7 @@ set :bind, '0.0.0.0'
   end
 
   get '/songs/new' do
+    @da_genres = Songify.genres_repo.all_genres
     erb :save
   end
 
