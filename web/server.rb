@@ -16,7 +16,7 @@ set :bind, '0.0.0.0'
   end
 
   get '/songs/new' do
-    @da_genres = Songify.genres_repo.all_genres
+    @genres = Songify.genres_repo.all_genres
     erb :save
   end
 
@@ -62,6 +62,7 @@ set :bind, '0.0.0.0'
   end
 
   get '/songs/:id/edit' do
+    @genres = Songify.genres_repo.all_genres
     @song_to_edit = Songify.songs_repo.get_song(params[:id])
     erb :edit
   end

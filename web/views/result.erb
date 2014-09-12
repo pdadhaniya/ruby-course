@@ -6,7 +6,12 @@
 <body>
   <h1>Requested Song</h1>
   <ul>
-      <li><%= @song["title"] %><%= (Songify.genres_repo.get_genre(@song["genre"]))["type"] %></li>
-  </ul>
+      <li><%= @song["title"] %> is a <%= (Songify.genres_repo.get_genre(@song["genre"]))["type"] %> song</li>
+  </ul><br>
+  <br>
+  <a href='/songs'>View Songs</a><br>
+  <a href='/genres'>View Genres</a><br>
+  <a href='/songs/new'>Add New Song</a><br>
+  <a href='/genres/new'>Add New Genre</a>
 </body>
 </html>  

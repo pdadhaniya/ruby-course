@@ -11,11 +11,10 @@
     <input name="song-title" id="title" type="text"><br>
     <label for="genre">Genre:</label>
     <select id="genre" name="genre-type">
-    <% @da_genres.each do |da_genre| %>
+    <% @genres.each do |da_genre| %>
     <option value="<%=da_genre%>"><%=da_genre%></option>
     <% end %>
-    </select>
-    <!-- <input name="genre-type" id="genre" type="text"><br> -->
+    </select><br>
     <input type="submit">
   </form>
 </body>
