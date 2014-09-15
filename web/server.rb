@@ -15,6 +15,11 @@ set :bind, '0.0.0.0'
     erb :genre_index
   end
 
+  get '/artists' do
+    @artists = Songify.artists_repo.get_all_artists
+    erb :artist_index
+  end
+
   get '/songs/new' do
     @genres = Songify.genres_repo.all_genres
     erb :save

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Artists Index</title>
+</head>
+<body>
+  <h1>Artist Names</h1>
+  <ul>
+    <% @artists.each do |artist| %>
+      <li><%= artist["name"] %></li>
+    <% end %>
+  </ul><br>
+  <br>
+  <a href='/songs'>View Songs</a><br>
+  <a href='/genres'>View Genres</a><br>
+  <a href='/genres/new'>Add New Genre</a><br>
+  <a href='/songs/new'>Add New Song</a>
+</body>
+</html>  

@@ -166,6 +166,17 @@ describe Songify::Server do
     end
   end
 
+  #ARTISTS
+  describe "GET /artists" do
+    it "loads the artists homepage" do
+      Songify.artists_repo.save_artist(Songify::Artist.new("Drake"))
+      Songify.artists_repo.save_artist(Songify::Artist.new("Jon"))
+
+      get '/artists'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Drake", "Jon"
+    end
+  end
 
 
 
