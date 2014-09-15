@@ -6,6 +6,8 @@ describe Songify::Repositories::GenresRepo do
   before(:each) do
     Songify.songs_repo.drop_tables
     Songify.genres_repo.drop_tables
+    Songify.artists_repo.drop_tables
+    Songify.artists_repo.create_tables
     Songify.genres_repo.create_tables
     Songify.songs_repo.create_tables
   end
@@ -62,9 +64,5 @@ describe Songify::Repositories::GenresRepo do
       expect(result[1]["type"]).to eq("Classical")
     end
   end
-
-
-
-
 
 end

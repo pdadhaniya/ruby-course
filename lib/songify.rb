@@ -18,6 +18,14 @@ module Songify
     @genres_repo
   end
 
+  def self.artists_repo=(x)
+    @artists_repo = x
+  end
+
+  def self.artists_repo
+    @artists_repo
+  end
+
 end
 
 
@@ -30,3 +38,4 @@ require_relative 'songify/repositories/artists.rb'
 
 Songify.songs_repo = Songify::Repositories::SongsRepo.new
 Songify.genres_repo = Songify::Repositories::GenresRepo.new
+Songify.artists_repo = Songify::Repositories::ArtistsRepo.new

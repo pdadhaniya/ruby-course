@@ -7,6 +7,8 @@ describe Songify::Repositories::SongsRepo do
   before(:each) do
     Songify.songs_repo.drop_tables
     Songify.genres_repo.drop_tables
+    Songify.artists_repo.drop_tables
+    Songify.artists_repo.create_tables
     Songify.genres_repo.create_tables
     Songify.songs_repo.create_tables
     Songify.genres_repo.save_genre(genre1)
@@ -56,10 +58,5 @@ describe Songify::Repositories::SongsRepo do
       expect(result[1]["genre"]).to eq("2")
     end
   end
-
-
-
-
-
   
 end
