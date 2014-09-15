@@ -25,7 +25,7 @@ set :bind, '0.0.0.0'
   end
 
   post '/songs' do
-    song = Songify::Song.new(params["song-title"], params["genre-type"])
+    song = Songify::Song.new(params["song-title"], params["genre-type"], params["artist-name"])
     Songify.songs_repo.save_song(song)
     redirect to("/songs/#{song.id}")
   end
@@ -37,7 +37,7 @@ set :bind, '0.0.0.0'
   end
 
   put '/songs/:id' do
-    song = Songify::Song.new(params["song-title"], params["genre-type"], params["id"])
+    song = Songify::Song.new(params["song-title"], params["genre-type"], params["artist-name"], params["id"])
     # binding.pry
     Songify.songs_repo.save_song(song)
     redirect to ("/songs/#{song.id}")
@@ -50,7 +50,7 @@ set :bind, '0.0.0.0'
   end
 
   delete '/songs/:id' do
-    song = Songify::Song.new(params["song-title"], params["genre-type"], params["id"])
+    song = Songify::Song.new(params["song-title"], params["genre-type"], params["artist-name"], params["id"])
     Songify.songs_repo.delete_song(song)
     redirect to ("/songs")    
   end

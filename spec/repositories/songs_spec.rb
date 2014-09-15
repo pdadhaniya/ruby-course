@@ -2,7 +2,7 @@ require_relative '../spec_helper.rb'
 
 describe Songify::Repositories::SongsRepo do 
   let(:genre1) { Songify::Genre.new("Rap")}
-  let(:song1) { Songify::Song.new("Happy Birthday", "Rap")}
+  let(:song1) { Songify::Song.new("Happy Birthday", "Rap", "Drake")}
 
   before(:each) do
     Songify.songs_repo.drop_tables
@@ -46,7 +46,7 @@ describe Songify::Repositories::SongsRepo do
     it "should return all songs in the songs table" do
       genre2 = Songify::Genre.new("Classical")
       Songify.genres_repo.save_genre(genre2)
-      song2 = Songify::Song.new("Hotel California", "Classical")
+      song2 = Songify::Song.new("Hotel California", "Classical", "Eagles")
       Songify.songs_repo.save_song(song1)
       Songify.songs_repo.save_song(song2)
       result = Songify.songs_repo.get_all_songs
