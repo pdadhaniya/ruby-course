@@ -11,6 +11,7 @@ module Songify
       def save_song(song)
         if song.id.nil?
           genre_id = Songify::genres_repo.get_genre_id(song.genre)
+          @songs_artists_all = song.artist
           command = <<-SQL
           INSERT INTO songs ( title, genre )
           VALUES ( '#{song.title}', '#{genre_id}' )
@@ -21,13 +22,35 @@ module Songify
           result
         else
           genre_id = Songify::genres_repo.get_genre_id(song.genre)
+          @songs_artists_all = song.artist
           command = <<-SQL
           UPDATE songs SET ( title, genre ) = ( '#{song.title}', '#{genre_id}' )
           WHERE id='#{song.id.to_i}'; 
           SQL
           result = @db.exec(command).first
         end
+
+
+        @songs_artists_all.map! do |artist|
+          Songify.artists_repo.get_artist_id(artist)
+        end
+
+        @songs_artists_all.each do |artist_id|
+          Songify.songs_artists_repo.update_songs_artists(song, artist_id)
+        end
+
+        return result
+
       end
+
+      # def update_songs_artists(song, artists_id)
+      #   command = <<-SQL
+      #   INSERT INTO songs_artists( song_id, artist_id )
+      #   VALUES ( '#{song.id}', '#{artists_id}' )
+      #   RETURNING *;
+      #   SQL
+      #   result = @db.exec(command)
+      # end
 
       def delete_song(song)
         command = <<-SQL
@@ -67,7 +90,7 @@ module Songify
 
       def drop_tables
         command = <<-SQL
-        DROP TABLE songs
+        DROP TABLE songs CASCADE;
         SQL
         result = @db.exec(command)
       end

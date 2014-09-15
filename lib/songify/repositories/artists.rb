@@ -66,7 +66,7 @@ module Songify
 
       def drop_tables
         command = <<-SQL
-        DROP TABLE artists;
+        DROP TABLE artists CASCADE;
         SQL
         result = @db.exec(command)
       end

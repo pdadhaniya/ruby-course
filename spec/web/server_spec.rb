@@ -3,6 +3,8 @@ require 'server_spec_helper'
 describe Songify::Server do
   let(:genre1) { Songify::Genre.new("Rap") }
   let(:genre2) { Songify::Genre.new("Classical")}
+  let(:artist1) { Songify::Artist.new("Drake")}
+  let(:artist2) { Songify::Artist.new("Eagles")}
 
   before(:each) do
     Songify.songs_artists_repo.drop_tables
@@ -24,8 +26,10 @@ describe Songify::Server do
     it "loads the songs homepage" do
       Songify.genres_repo.save_genre(genre1)
       Songify.genres_repo.save_genre(genre2)
-      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", "Drake"))
-      Songify.songs_repo.save_song(Songify::Song.new("Hotel California", "Classical", "Eagles"))
+      Songify.artists_repo.save_artist(artist1)
+      Songify.artists_repo.save_artist(artist2)
+      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", ["Drake"]))
+      Songify.songs_repo.save_song(Songify::Song.new("Hotel California", "Classical", ["Eagles"]))
 
       get '/songs'
       expect(last_response).to be_ok
@@ -45,8 +49,10 @@ describe Songify::Server do
     it "should show the title and genre of the song who's id was searched for" do
       Songify.genres_repo.save_genre(genre1)
       Songify.genres_repo.save_genre(genre2)
-      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", "Drake"))
-      Songify.songs_repo.save_song(Songify::Song.new("Hotel California", "Classical", "Eagles"))
+      Songify.artists_repo.save_artist(artist1)
+      Songify.artists_repo.save_artist(artist2)
+      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", ["Drake"]))
+      Songify.songs_repo.save_song(Songify::Song.new("Hotel California", "Classical", ["Eagles"]))
 
       get '/songs/2'
       expect(last_response).to be_ok
@@ -58,8 +64,10 @@ describe Songify::Server do
   describe 'POST /songs' do
     it "should save the inputted song into the songs database and redirect to that songs page" do
       Songify.genres_repo.save_genre(genre1)
-      Songify.genres_repo.save_genre(genre2)      
-      post '/songs', { "song-title" => "Stairway to Heaven", "genre-type" => "Rap", "artist-name" => "Drake"}
+      Songify.genres_repo.save_genre(genre2)
+      Songify.artists_repo.save_artist(artist1)
+      Songify.artists_repo.save_artist(artist2)      
+      post '/songs', { "song-title" => "Stairway to Heaven", "genre-type" => "Rap", "artist-name" => ["Drake"]}
       expect(last_response.status).to eq(302)
       last_song = Songify.songs_repo.get_all_songs.last
       expect(last_song["title"]).to eq("Stairway to Heaven")
@@ -69,7 +77,8 @@ describe Songify::Server do
   describe 'GET /songs/:id/edit' do
     it "should show the form to edit a song based on the id put in the link" do
       Songify.genres_repo.save_genre(genre1)
-      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", "Drake"))
+      Songify.artists_repo.save_artist(artist1)
+      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", ["Drake"]))
       get '/songs/1/edit'
       expect(last_response).to be_ok
       expect(last_response.body).to include "Title:", "Genre"
@@ -79,7 +88,8 @@ describe Songify::Server do
   describe 'DELETE /songs/' do
     it "should remove the song from the database" do
       Songify.genres_repo.save_genre(genre1)
-      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", "Drake"))
+      Songify.artists_repo.save_artist(artist1) 
+      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", ["Drake"]))
 
       delete '/songs/1', { "song-title" => "Happy Birthday"}
       expect(last_response).to be_redirect
@@ -89,9 +99,10 @@ describe Songify::Server do
   describe 'PUT /songs/:id' do
     it "should update the song title in the database and redirect to the page" do
       Songify.genres_repo.save_genre(genre1)
-      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", "Drake"))
+      Songify.artists_repo.save_artist(artist1)
+      Songify.songs_repo.save_song(Songify::Song.new("Happy Birthday", "Rap", ["Drake"]))
 
-      put '/songs/1', { "song-title" => "Parag Dadhaniya", "genre-type" => "Rap" }
+      put '/songs/1', { "song-title" => "Parag Dadhaniya", "genre-type" => "Rap", "artist-name" => ["Drake"] }
       expect(last_response.status).to eq(302)
       last_song = Songify.songs_repo.get_all_songs.last
       expect(last_song["title"]).to eq("Parag Dadhaniya")
