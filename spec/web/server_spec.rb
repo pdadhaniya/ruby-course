@@ -7,6 +7,8 @@ describe Songify::Server do
   before(:each) do
     Songify.songs_repo.drop_tables
     Songify.genres_repo.drop_tables
+    Songify.artists_repo.drop_tables
+    Songify.artists_repo.create_tables
     Songify.genres_repo.create_tables
     Songify.songs_repo.create_tables
   end
@@ -183,6 +185,17 @@ describe Songify::Server do
       get '/artists/new'
       expect(last_response).to be_ok
       expect(last_response.body).to include "Name:"
+    end
+  end
+
+  describe 'GET /artists/:id' do
+    it "should show the name of the artist who's id was searched for" do
+      Songify.artists_repo.save_artist(Songify::Artist.new("U2"))
+      Songify.artists_repo.save_artist(Songify::Artist.new("Drake"))
+
+      get '/artists/2'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Drake"
     end
   end
 

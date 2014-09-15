@@ -48,7 +48,7 @@ set :bind, '0.0.0.0'
   post '/artists' do
     artist = Songify::Artist.new(params["artist-name"])
     Songify.artists_repo.save_artist(artist)
-    redirect to("/artists")
+    redirect to("/artists/#{artist.id}")
   end
 
   put '/songs/:id' do
@@ -95,6 +95,11 @@ set :bind, '0.0.0.0'
   get '/genres/:id' do
     @genre = Songify.genres_repo.get_genre(params[:id])
     erb :result_genre
+  end
+
+  get '/artists/:id' do
+    @artist = Songify.artists_repo.get_artist(params[:id])
+    erb :result_artist
   end
 
 run! if app_file == $0 #what does this mean?!?!
