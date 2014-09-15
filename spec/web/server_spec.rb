@@ -209,6 +209,26 @@ describe Songify::Server do
     end
   end
 
+  describe 'GET /artists/:id/edit' do
+    it "should show the form to edit an artist based on the id put in the link" do
+      Songify.artists_repo.save_artist(Songify::Artist.new("U2"))
+
+      get '/artists/1/edit'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Name:"
+    end
+  end
+
+  describe 'PUT /artists/:id' do
+    it "should update the artist type in the database and redirect to the page" do
+      Songify.artists_repo.save_artist(Songify::Artist.new("U2"))
+
+      put '/artists/1', { "artist-name" => "MGK" }
+      expect(last_response.status).to eq(302)
+      last_artist = Songify.artists_repo.get_all_artists.last
+      expect(last_artist["name"]).to eq("MGK")
+    end
+  end
 
 
 end

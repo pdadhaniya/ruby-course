@@ -64,6 +64,12 @@ set :bind, '0.0.0.0'
     redirect to ("/genres/#{genre.id}")
   end
 
+  put '/artists/:id' do
+    artist = Songify::Artist.new(params["artist-name"], params["id"])
+    Songify.artists_repo.save_artist(artist)
+    redirect to ("/artists/#{artist.id}")
+  end
+
   delete '/songs/:id' do
     song = Songify::Song.new(params["song-title"], params["genre-type"], params["artist-name"], params["id"])
     Songify.songs_repo.delete_song(song)
@@ -85,6 +91,11 @@ set :bind, '0.0.0.0'
   get '/genres/:id/edit' do
     @genre_to_edit = Songify.genres_repo.get_genre(params[:id])
     erb :edit_genre
+  end
+
+  get '/artists/:id/edit' do
+    @artist_to_edit = Songify.artists_repo.get_artist(params[:id])
+    erb :edit_artist
   end
 
   get '/songs/:id' do

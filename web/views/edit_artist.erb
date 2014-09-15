@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Artist</title>
+</head>
+<body>
+  <h1>Edit an Artist</h1>
+
+  <form action="/artists/<%=@artist_to_edit["id"]%>" method="post">
+    <label for="title">Name:</label>
+    <input name="artist-name" id="title" type="text" value="<%=@artist_to_edit['name']%>">
+    <input name="_method" type="hidden" value="put"><br>
+
+    <input type="submit">
+  </form>
+
+  <form action="/artists/<%=@artist_to_edit["id"]%>" method="post">
+    <input name="artist-name" type="hidden" value="<%=@artist_to_edit['name']%>">
+    <input name="id" type="hidden" value="<%=@artist_to_edit['id']%>">
+    <input name="_method" type="hidden" value="delete"><br>
+
+    <input type="submit" value="Delete">
+  </form>
+
+
+</body>
+</html>  
