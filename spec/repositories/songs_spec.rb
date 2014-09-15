@@ -34,6 +34,14 @@ describe Songify::Repositories::SongsRepo do
     end
   end
 
+  describe "get_song_id" do
+    it "should return the id of the song requested" do
+      Songify.songs_repo.save_song(song1)
+      result = Songify.songs_repo.get_song_id("Happy Birthday")
+      expect(result).to eq(1)
+    end
+  end
+
   describe "#get_song" do
     it "should return the requested song" do
       Songify.songs_repo.save_song(song1)

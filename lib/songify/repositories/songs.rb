@@ -43,6 +43,14 @@ module Songify
         result = @db.exec(command).first
       end
 
+      def get_song_id(title)
+        command = <<-SQL
+        SELECT * FROM songs WHERE title='#{title}'
+        SQL
+        result = @db.exec(command).first
+        x = result["id"].to_i
+      end
+
       def get_all_songs
         command = <<-SQL
         SELECT * FROM songs
