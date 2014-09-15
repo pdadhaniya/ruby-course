@@ -29,6 +29,10 @@ set :bind, '0.0.0.0'
     erb :save_genre
   end
 
+  get '/artists/new' do
+    erb :save_artist
+  end
+
   post '/songs' do
     song = Songify::Song.new(params["song-title"], params["genre-type"], params["artist-name"])
     Songify.songs_repo.save_song(song)

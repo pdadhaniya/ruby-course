@@ -178,7 +178,13 @@ describe Songify::Server do
     end
   end
 
-
+  describe 'GET /artists/new' do
+    it "should show the form to save a new artist" do
+      get '/artists/new'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "Name:"
+    end
+  end
 
 
 
