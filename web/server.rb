@@ -82,6 +82,12 @@ set :bind, '0.0.0.0'
     redirect to ("/genres")
   end
 
+  delete '/artists/:id' do
+    artist = Songify::Artist.new(params["artist-name"], params["id"])
+    Songify.artists_repo.delete_artist(artist)
+    redirect to ("/artists")
+  end
+
   get '/songs/:id/edit' do
     @genres = Songify.genres_repo.all_genres
     @song_to_edit = Songify.songs_repo.get_song(params[:id])

@@ -219,6 +219,15 @@ describe Songify::Server do
     end
   end
 
+  describe 'DELETE /artists/' do
+    it "should remove the artist from the database" do
+      Songify.artists_repo.save_artist(Songify::Artist.new("DMX"))
+
+      delete '/artists/1', { "artist-name" => "DMX"}
+      expect(last_response).to be_redirect
+    end
+  end
+
   describe 'PUT /artists/:id' do
     it "should update the artist type in the database and redirect to the page" do
       Songify.artists_repo.save_artist(Songify::Artist.new("U2"))
