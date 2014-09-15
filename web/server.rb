@@ -45,6 +45,12 @@ set :bind, '0.0.0.0'
     redirect to("/genres/#{genre.id}")
   end
 
+  post '/artists' do
+    artist = Songify::Artist.new(params["artist-name"])
+    Songify.artists_repo.save_artist(artist)
+    redirect to("/artists")
+  end
+
   put '/songs/:id' do
     song = Songify::Song.new(params["song-title"], params["genre-type"], params["artist-name"], params["id"])
     # binding.pry

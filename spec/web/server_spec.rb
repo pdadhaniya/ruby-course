@@ -186,6 +186,16 @@ describe Songify::Server do
     end
   end
 
+  describe 'POST /artists' do
+    it "should save the inputted artist into the artists database and redirect to that artists page" do
+      
+      post '/artists', { "artist-name" => "Drake"}
+      expect(last_response.status).to eq(302)
+      last_artist = Songify.artists_repo.get_all_artists.last
+      expect(last_artist["name"]).to eq("Drake")
+    end
+  end
+
 
 
 end
