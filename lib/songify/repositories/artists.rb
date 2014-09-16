@@ -3,6 +3,7 @@ require 'pg'
 module Songify
   module Repositories
     class ArtistsRepo
+      attr_reader :all_artists
 
       def initialize
         @db = PG.connect(host: 'localhost', dbname: 'songify-db')
@@ -55,6 +56,11 @@ module Songify
         SELECT * FROM artists;
         SQL
         result = @db.exec(command).entries
+        @all_artists = []
+        result.each do |artist_hash|
+          @all_artists << artist_hash["name"]
+        end
+        result
       end
 
       def create_tables

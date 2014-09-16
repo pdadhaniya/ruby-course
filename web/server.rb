@@ -22,6 +22,7 @@ set :bind, '0.0.0.0'
 
   get '/songs/new' do
     @genres = Songify.genres_repo.all_genres
+    @artists = Songify.artists_repo.all_artists
     erb :save
   end
 
@@ -34,7 +35,12 @@ set :bind, '0.0.0.0'
   end
 
   post '/songs' do
-    song = Songify::Song.new(params["song-title"], params["genre-type"], params["artist-name"])
+    puts params
+    artist_arr = []
+    params["artist-name"].each do |artist|
+      artist_arr << artist
+    end
+    song = Songify::Song.new(params["song-title"], params["genre-type"], artist_arr)
     Songify.songs_repo.save_song(song)
     redirect to("/songs/#{song.id}")
   end

@@ -9,14 +9,21 @@
   <form action="/songs" method="post">
     <label for="title">Title:</label>
     <input name="song-title" id="title" type="text"><br>
+    
     <label for="genre">Genre:</label>
     <select id="genre" name="genre-type">
     <% @genres.each do |da_genre| %>
     <option value="<%=da_genre%>"><%=da_genre%></option>
     <% end %>
     </select><br>
-    <label for ="artist">Artist:</label>
-    <input name="artist-name" id="artist" type="text"><br>
+    <label for="artist">Artist:</label>
+    <select id="artist" name="artist-name[]">
+    <% @artists.each do |artist| %>
+    <option value="<%=artist%>"><%=artist%></option>
+    <% end %>
+    </select><br>
+    <!-- <label for ="artist">Artist:</label> -->
+    <!-- <input name="artist-name[]" id="artist" type="text"><br> -->
     <input type="submit">
   </form>
 </body>
