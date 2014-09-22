@@ -1,0 +1,8 @@
+Jon's List
+- could try using hash for entity params
+- can make a repo class that contains pg connection that the other repo's inherit from, so you don't have to redefine connection every repo
+- you can make one layout file for your web templates
+- i like your routes
+- code looks organized and concise A+++
+- watch out for user errors in web
+- WHERES DAT CSS U LUV?

@@ -18,9 +18,4 @@ describe Songify::Song do
     end
   end
 
-
-
-
-
-  
 end

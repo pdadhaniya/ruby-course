@@ -4,14 +4,8 @@ describe Songify::Repositories::ArtistsRepo do
   let(:artist1) { Songify::Artist.new("U2") }
 
   before(:each) do
-    Songify.songs_artists_repo.drop_tables
-    Songify.songs_repo.drop_tables
-    Songify.genres_repo.drop_tables
-    Songify.artists_repo.drop_tables
-    Songify.artists_repo.create_tables
-    Songify.genres_repo.create_tables
-    Songify.songs_repo.create_tables
-    Songify.songs_artists_repo.create_tables
+    Songify.drop_tables
+    Songify.create_tables
   end
 
   describe "#save_artist" do

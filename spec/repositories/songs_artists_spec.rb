@@ -2,18 +2,10 @@ require_relative '../spec_helper.rb'
 
 describe Songify::Repositories::SongsArtistsRepo do
 
-
   before(:each) do
-    Songify.songs_artists_repo.drop_tables
-    Songify.songs_repo.drop_tables
-    Songify.genres_repo.drop_tables
-    Songify.artists_repo.drop_tables
-    Songify.artists_repo.create_tables
-    Songify.genres_repo.create_tables
-    Songify.songs_repo.create_tables
-    Songify.songs_artists_repo.create_tables
+    Songify.drop_tables
+    Songify.create_tables
   end
-
 
   describe "#view_songs_artists" do
     it "should display all records for the songs artists table" do
@@ -32,16 +24,5 @@ describe Songify::Repositories::SongsArtistsRepo do
       expect(result[1]["artist_id"]).to eq("2")
     end
   end
-
-
-
-
-
-
-
-
-
-
-
 
 end

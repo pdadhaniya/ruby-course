@@ -9,9 +9,5 @@ describe Songify::Artist do
     end
   end
 
-
-
-
-
   
 end

@@ -59,7 +59,6 @@ set :bind, '0.0.0.0'
 
   put '/songs/:id' do
     song = Songify::Song.new(params["song-title"], params["genre-type"], params["artist-name"], params["id"])
-    # binding.pry
     Songify.songs_repo.save_song(song)
     redirect to ("/songs/#{song.id}")
   end
@@ -125,6 +124,6 @@ set :bind, '0.0.0.0'
     erb :result_artist
   end
 
-run! if app_file == $0 #what does this mean?!?!
+run! if app_file == $0
 
 end

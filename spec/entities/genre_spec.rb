@@ -9,6 +9,4 @@ describe Songify::Genre do
     end
   end
 
-
-
 end

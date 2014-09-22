@@ -77,9 +77,6 @@ module Songify
         result = @db.exec(command)
       end
 
-
-
-
     end
   end
 end

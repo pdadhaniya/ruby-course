@@ -7,21 +7,14 @@ describe Songify::Server do
   let(:artist2) { Songify::Artist.new("Eagles")}
 
   before(:each) do
-    Songify.songs_artists_repo.drop_tables
-    Songify.songs_repo.drop_tables
-    Songify.genres_repo.drop_tables
-    Songify.artists_repo.drop_tables
-    Songify.artists_repo.create_tables
-    Songify.genres_repo.create_tables
-    Songify.songs_repo.create_tables
-    Songify.songs_artists_repo.create_tables
+    Songify.drop_tables
+    Songify.create_tables
   end
 
   def app
     Songify::Server.new
   end
 
-  #SONGS
   describe "GET /songs" do
     it "loads the songs homepage" do
       Songify.genres_repo.save_genre(genre1)
@@ -57,7 +50,6 @@ describe Songify::Server do
       get '/songs/2'
       expect(last_response).to be_ok
       expect(last_response.body).to include "Hotel California", "Classical"
-      # expect(last_response.body).to include "Classical"
     end
   end
 
@@ -109,8 +101,6 @@ describe Songify::Server do
     end
   end
 
-
-  #GENRES
   describe "GET /genres" do
     it "loads the genres homepage" do
       Songify.genres_repo.save_genre(Songify::Genre.new("Rap"))
@@ -181,7 +171,6 @@ describe Songify::Server do
     end
   end
 
-  #ARTISTS
   describe "GET /artists" do
     it "loads the artists homepage" do
       Songify.artists_repo.save_artist(Songify::Artist.new("Drake"))

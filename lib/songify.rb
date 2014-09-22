@@ -34,6 +34,20 @@ module Songify
     @songs_artists_repo
   end
 
+  def self.drop_tables
+    Songify.songs_artists_repo.drop_tables
+    Songify.songs_repo.drop_tables
+    Songify.genres_repo.drop_tables
+    Songify.artists_repo.drop_tables
+  end
+
+  def self.create_tables
+    Songify.artists_repo.create_tables
+    Songify.genres_repo.create_tables
+    Songify.songs_repo.create_tables
+    Songify.songs_artists_repo.create_tables
+  end
+
 end
 
 

@@ -6,20 +6,14 @@ describe Songify::Repositories::SongsRepo do
   let(:artist1) { Songify::Artist.new("Drake")}
 
   before(:each) do
-    Songify.songs_artists_repo.drop_tables
-    Songify.songs_repo.drop_tables
-    Songify.genres_repo.drop_tables
-    Songify.artists_repo.drop_tables
-    Songify.artists_repo.create_tables
-    Songify.genres_repo.create_tables
-    Songify.songs_repo.create_tables
-    Songify.songs_artists_repo.create_tables
+    Songify.drop_tables
+    Songify.create_tables
     Songify.genres_repo.save_genre(genre1)
+    Songify.artists_repo.save_artist(artist1)
   end
 
   describe "#save_song" do
     it "should save a song to the songs table" do
-      Songify.artists_repo.save_artist(artist1)
       result = Songify.songs_repo.save_song(song1)
       expect(result["title"]).to eq("Happy Birthday")
       expect(result["genre"]).to eq("1")
@@ -30,7 +24,6 @@ describe Songify::Repositories::SongsRepo do
 
   describe "#delete_song" do
     it "should remove a song from the songs table" do
-      Songify.artists_repo.save_artist(artist1)
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.delete_song(song1)
       expect(result.entries).to eq([])
@@ -39,7 +32,6 @@ describe Songify::Repositories::SongsRepo do
 
   describe "get_song_id" do
     it "should return the id of the song requested" do
-      Songify.artists_repo.save_artist(artist1)
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.get_song_id("Happy Birthday")
       expect(result).to eq(1)
@@ -48,7 +40,6 @@ describe Songify::Repositories::SongsRepo do
 
   describe "#get_song" do
     it "should return the requested song" do
-      Songify.artists_repo.save_artist(artist1)
       Songify.songs_repo.save_song(song1)
       result = Songify.songs_repo.get_song(1)
       expect(result["title"]).to eq("Happy Birthday")
@@ -59,7 +50,6 @@ describe Songify::Repositories::SongsRepo do
 
   describe "#get_all_songs" do
     it "should return all songs in the songs table" do
-      Songify.artists_repo.save_artist(artist1)
       artist2 = Songify::Artist.new("Eagles")
       Songify.artists_repo.save_artist(artist2)
       genre2 = Songify::Genre.new("Classical")

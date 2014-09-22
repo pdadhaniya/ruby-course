@@ -30,7 +30,6 @@ module Songify
           result = @db.exec(command).first
         end
 
-
         @songs_artists_all.map! do |artist|
           Songify.artists_repo.get_artist_id(artist)
         end
@@ -40,17 +39,7 @@ module Songify
         end
 
         return result
-
       end
-
-      # def update_songs_artists(song, artists_id)
-      #   command = <<-SQL
-      #   INSERT INTO songs_artists( song_id, artist_id )
-      #   VALUES ( '#{song.id}', '#{artists_id}' )
-      #   RETURNING *;
-      #   SQL
-      #   result = @db.exec(command)
-      # end
 
       def delete_song(song)
         command = <<-SQL
