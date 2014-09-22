@@ -2,6 +2,13 @@
 <html>
 <head>
   <title>New Song</title>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #2fcb12;
+    }
+  </style>
 </head>
 <body>
   <h1>Save a Song</h1>
@@ -16,15 +23,18 @@
     <option value="<%=da_genre%>"><%=da_genre%></option>
     <% end %>
     </select><br>
-    <label for="artist">Artist:</label>
-    <select id="artist" name="artist-name[]">
-    <% @artists.each do |artist| %>
-    <option value="<%=artist%>"><%=artist%></option>
-    <% end %>
-    </select><br>
+    <div class="artiste">
+      <label for="artist">Artist:</label>
+      <input name="artist-name[]" id="artist" type="text">
+      <br>
+    </div>
+    <div class="fa fa-plus-square">Click to add a song</div>
+    <br>
     <!-- <label for ="artist">Artist:</label> -->
     <!-- <input name="artist-name[]" id="artist" type="text"><br> -->
     <input type="submit">
   </form>
+    <script src='/js.js'></script>
+
 </body>
 </html>  

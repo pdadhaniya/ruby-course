@@ -7,8 +7,13 @@ GEM
       slop (~> 3.6)
     coderay (1.1.0)
     columnize (0.8.9)
+    commonjs (0.2.7)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
+    font-awesome-less (4.2.0)
+      less (~> 2.4.0)
+    less (2.4.0)
+      commonjs (~> 0.2.7)
     method_source (0.8.2)
     pg (0.17.1)
     pry (0.10.1)
@@ -43,6 +48,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  font-awesome-less
   pg
   pry-byebug
   rack-test
