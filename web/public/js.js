@@ -1,9 +1,17 @@
 var $artiste = $('.artiste');
 
 var addArtist = function() {
-  $artiste.append("<label for='artist'>Artist:</label><input name='artist-name[]' id='artist' type='text'><br>");
+  $artiste.append("<div class='artistfield'><label for='artist'>Artist:</label><input name='artist-name[]' id='artist' type='text'></div<br>");
 }
 
-$(document).on('click', '.fa', function(){
+var removeArtist = function() {
+  $('.artiste .artistfield:last-child').remove();
+}
+
+$(document).on('click', '.add', function(){
   addArtist();
+});
+
+$(document).on('click', '.subtract', function(){
+  removeArtist();
 });
